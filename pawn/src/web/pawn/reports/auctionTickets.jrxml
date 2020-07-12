@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="828" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif"/>
+	<style name="Row"/>
+	<parameter name="jpUserName" class="java.lang.String"/>
+	<parameter name="jpIntBranchId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jpFromDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jpToDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT t.tktno,
+     t.`condate`,
+     t.`pawnadv`,
+     t.`tktno`,
+     t.`MKTVALUE` AS mktvalue,
+     t.`NETWEIGHT` AS netweight,
+     d.`BALAMOUNT` AS tblduefrom_BALAMOUNT,
+     p.`NAME` AS tblpawner_NAME,
+     p.`INITIALS` AS tblpawner_INITIALS,
+     p.`CLTITLE` AS tblpawner_CLTITLE,
+     p.IDNO as "NIC",
+     p.hometpno as "home",
+     p.mobileno as "mobile",
+/*     a.description as "desc",*/
+     d.`DUEAMOUNT` AS "DUEAMOUNT",
+     at.AUCTIONEXP as "cost",
+     at.UPSETVALUE as "UPSETVALUE",
+     at.SOLDAMT as "SOLDAMT",
+     at.EXCESS as "EXCESS",
+     t.GROSSWEIGHT as "GROSSWEIGHT",
+(select compname from tblusercompany ) as comp
+FROM tblauctionticket at
+INNER JOIN tblticket t ON at.tktid = t.TICKETID
+/*INNER JOIN tblticketarticle ta ON t.`TICKETID` = ta.`TICKETID`*/
+INNER JOIN tblduefrom d ON t.`TICKETID` = d.`TICKETID`
+INNER JOIN tblpawner p ON t.`PWNID` = p.`PWNID`
+/*INNER JOIN tblarticle a ON ta.ARTICALID = a.ARTICALID*/
+INNER JOIN tblauctionmaster am on am.auctionid = at.AUCTIONID
+WHERE d.`duetypeid` = 2
+and ($P{jpIntBranchId} = 999 or at.branchid = $P{jpIntBranchId})
+and am.auctiondate >=  $P{jpFromDate}
+and am.auctiondate <= $P{jpToDate}]]>
+	</queryString>
+	<field name="tktno" class="java.lang.String"/>
+	<field name="condate" class="java.sql.Timestamp"/>
+	<field name="pawnadv" class="java.math.BigDecimal"/>
+	<field name="mktvalue" class="java.math.BigDecimal"/>
+	<field name="netweight" class="java.math.BigDecimal"/>
+	<field name="tblduefrom_BALAMOUNT" class="java.math.BigDecimal"/>
+	<field name="tblpawner_NAME" class="java.lang.String"/>
+	<field name="tblpawner_INITIALS" class="java.lang.String"/>
+	<field name="tblpawner_CLTITLE" class="java.lang.String"/>
+	<field name="NIC" class="java.lang.String"/>
+	<field name="home" class="java.lang.String"/>
+	<field name="mobile" class="java.lang.String"/>
+	<field name="DUEAMOUNT" class="java.math.BigDecimal"/>
+	<field name="cost" class="java.math.BigDecimal"/>
+	<field name="UPSETVALUE" class="java.math.BigDecimal"/>
+	<field name="SOLDAMT" class="java.math.BigDecimal"/>
+	<field name="EXCESS" class="java.math.BigDecimal"/>
+	<field name="GROSSWEIGHT" class="java.math.BigDecimal"/>
+	<field name="comp" class="java.lang.String"/>
+	<variable name="pawnadv_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{pawnadv}]]></variableExpression>
+	</variable>
+	<variable name="tblticketarticle_MARVALUE_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{mktvalue}]]></variableExpression>
+	</variable>
+	<variable name="tblduefrom_BALAMOUNT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tblduefrom_BALAMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="GROSSWEIGHT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{GROSSWEIGHT}]]></variableExpression>
+	</variable>
+	<variable name="netweight_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{netweight}]]></variableExpression>
+	</variable>
+	<variable name="pawnadv_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{pawnadv}]]></variableExpression>
+	</variable>
+	<variable name="netweight_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{netweight}]]></variableExpression>
+	</variable>
+	<variable name="DUEAMOUNT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{DUEAMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="tblduefrom_BALAMOUNT_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tblduefrom_BALAMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="cost_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{cost}]]></variableExpression>
+	</variable>
+	<variable name="UPSETVALUE_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{UPSETVALUE}]]></variableExpression>
+	</variable>
+	<variable name="SOLDAMT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{SOLDAMT}]]></variableExpression>
+	</variable>
+	<variable name="EXCESS_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{EXCESS}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<textField>
+				<reportElement x="81" y="56" width="100" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jpUserName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm.ss a">
+				<reportElement style="Column header" x="159" y="41" width="83" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="3" width="163" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{comp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="56" width="78" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[User Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="41" width="78" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="2" y="25" width="138" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Auction Tickets Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="167" y="3" width="97" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pawning System]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="81" y="41" width="77" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="71" width="62" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From Date]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="65" y="71" width="93" height="13"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{jpFromDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="71" width="56" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To Date]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="216" y="71" width="111" height="13"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{jpToDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="2" width="34" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="1" width="43" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount
+Granted
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="2" width="34" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ticket ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="2" width="31" height="18"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="2" width="146" height="26"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel Phone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="2" width="27" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net
+Weig]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="30" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross
+Weig]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="0" width="55" height="28"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Interest
+Accrured]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="586" y="0" width="44" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="0" width="55" height="28"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cost
+Allocated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="688" y="1" width="36" height="27"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Upset
+Value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="739" y="0" width="40" height="28"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sold
+Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="791" y="1" width="37" height="27"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Excess
+Deficit]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="828" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="27" width="827" height="1"/>
+			</line>
+			<line>
+				<reportElement x="827" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="779" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="733" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="687" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="630" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="585" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="529" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="485" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="453" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="425" y="0" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="277" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="222" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="141" y="1" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="27"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="-2" y="0" width="830" height="27"/>
+				<textField>
+					<reportElement x="488" y="0" width="43" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{pawnadv}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="4" y="0" width="138" height="15"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tblpawner_CLTITLE}+" " +$F{tblpawner_INITIALS}+" " +$F{tblpawner_NAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="144" y="0" width="80" height="14"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tktno}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="225" y="0" width="54" height="14"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{NIC}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="280" y="0" width="147" height="25"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{home}     -    $F{mobile}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="457" y="0" width="30" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{GROSSWEIGHT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="532" y="0" width="55" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{DUEAMOUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="588" y="0" width="44" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tblduefrom_BALAMOUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="634" y="0" width="55" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cost}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="690" y="0" width="45" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{UPSETVALUE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="737" y="0" width="44" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{SOLDAMT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="782" y="0" width="48" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{EXCESS}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="2" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="143" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="224" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="279" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="427" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="455" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="487" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="531" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="587" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="632" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="689" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="735" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="781" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="829" y="0" width="1" height="27"/>
+				</line>
+				<line>
+					<reportElement x="2" y="26" width="828" height="1"/>
+				</line>
+			</frame>
+			<textField>
+				<reportElement x="426" y="0" width="27" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{netweight}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="30" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{GROSSWEIGHT_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="43" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{pawnadv_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="0" width="55" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{DUEAMOUNT_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="586" y="0" width="44" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{tblduefrom_BALAMOUNT_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="632" y="0" width="55" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{cost_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="687" y="0" width="46" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{UPSETVALUE_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="735" y="0" width="44" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{SOLDAMT_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="30" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{netweight_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="783" y="0" width="44" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{EXCESS_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

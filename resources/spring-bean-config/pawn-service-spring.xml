@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="systemProgramService" class="com.m4.pawning.service.impl.SystemProgramServiceImpl">
+		<property name="systemProgramDAO" ref="systemProgramDAO"/>
+	</bean>
+
+	<bean name="/loginProcess" class="com.m4.pawning.web.action.LoginAction">
+		<property name="systemProgramService" ref="systemProgramService"/>
+		<property name="programAccessService" ref="programAccessProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+	</bean>
+
+	<bean id="ticketStatusProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.TicketStatusServiceImpl">
+				<property name="ticketStatusDAO" ref="ticketStatusDAO"/>
+				<property name="authorizableDAO" ref="ticketStatusDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/ticketStatusService" class="com.m4.pawning.web.action.TicketStatusAction"  parent="masterAction">
+		<property name="ticketStatusService" ref="ticketStatusProxy"/>
+	</bean>
+
+	<bean id="locationProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.LocationServiceImpl">
+				<property name="locationDAO" ref="locationDAO"/>
+				<property name="authorizableDAO" ref="locationDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/locationService" class="com.m4.pawning.web.action.LocationAction" parent="masterAction">
+		<property name="locationService" ref="locationProxy"/>
+	</bean>
+
+	<bean id="dueTypeProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.DueTypeServiceImpl">
+				<property name="dueTypeDAO" ref="dueTypeDAO"/>
+				<property name="authorizableDAO" ref="dueTypeDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/dueTypeService" class="com.m4.pawning.web.action.DueTypeAction" parent="masterAction">
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+	</bean>
+
+	<bean id="pawnerTypeProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.PawnerTypeServiceImpl">
+				<property name="pawnerTypeDAO" ref="pawnerTypeDAO"/>
+				<property name="authorizableDAO" ref="pawnerTypeDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/pawnerTypeService" class="com.m4.pawning.web.action.PawnerTypeAction" parent="masterAction">
+		<property name="pawnerTypeService" ref="pawnerTypeProxy"/>
+	</bean>
+
+	<bean id="closureTypeProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ClosureTypeServiceImpl">
+				<property name="closureTypeDAO" ref="closureTypeDAO"/>
+				<property name="authorizableDAO" ref="closureTypeDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/closureTypeService" class="com.m4.pawning.web.action.ClosureTypeAction" parent="masterAction">
+		<property name="closureTypeService" ref="closureTypeProxy"/>
+	</bean>
+
+	<bean id="companyProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.CompanyServiceImpl">
+				<property name="companyDAO" ref="companyDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/companyService" class="com.m4.pawning.web.action.CompanyAction" parent="masterAction">
+		<property name="companyService" ref="companyProxy"/>
+	</bean>
+
+	<bean id="branchProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.BranchServiceImpl">
+				<property name="branchDAO" ref="branchDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/branchService" class="com.m4.pawning.web.action.BranchAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+	</bean>
+
+	<bean id="userGroupProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.UserGroupServiceImpl">
+				<property name="userGroupDAO" ref="userGroupDAO"/>
+				<property name="authorizableDAO" ref="userGroupDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/userGroupService" class="com.m4.pawning.web.action.UserGroupAction" parent="masterAction">
+		<property name="userGroupService" ref="userGroupProxy"/>
+	</bean>
+
+	<bean id="articleModelProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ArticleModelServiceImpl">
+				<property name="articaleModelDAO" ref="articleModelDAO"/>
+				<property name="authorizableDAO" ref="articleModelDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/articleModelService" class="com.m4.pawning.web.action.ArticleModelAction" parent="masterAction">
+		<property name="articaleModelService" ref="articleModelProxy"/>
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="auctionLocationProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuctionLocationServiceImpl">
+				<property name="auctionLocationDAO" ref="auctionLocationDAO"/>
+				<property name="authorizableDAO" ref="auctionLocationDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/auctionLocationService" class="com.m4.pawning.web.action.AuctionLocationAction" parent="masterAction">
+		<property name="auctionLocationService" ref="auctionLocationProxy"/>
+	</bean>
+
+	<bean id="productProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ProductServiceImpl">
+				<property name="productDAO" ref="productDAO"/>
+				<property name="authorizableDAO" ref="productDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/productService" class="com.m4.pawning.web.action.ProductAction" parent="masterAction">
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="programAccessProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ProgramAccessServiceImpl">
+				<property name="programAccessDAO" ref="programAccessDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/programAccessService" class="com.m4.pawning.web.action.ProgramAccessAction" parent="masterAction">
+		<property name="programAccessService" ref="programAccessProxy"/>
+		<property name="userGroupService" ref="userGroupProxy"/>
+	</bean>
+
+	<bean id="cartageMarsterProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.CartageMarsterServiceImpl">
+				<property name="cartageMarsterDAO" ref="cartageMarsterDAO"/>
+				<property name="authorizableDAO" ref="cartageMarsterDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/cartageMarsterService" class="com.m4.pawning.web.action.CartageMarsterAction" parent="masterAction">
+		<property name="cartageMarsterService" ref="cartageMarsterProxy"/>
+	</bean>
+
+	<bean id="articleProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ArticleServiceImpl">
+				<property name="articleDAO" ref="articleDAO"/>
+				<property name="authorizableDAO" ref="articleDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/articleService" class="com.m4.pawning.web.action.ArticleAction" parent="masterAction">
+		<property name="articaleModelService" ref="articleModelProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="articleService" ref="articleProxy"/>
+	</bean>
+
+	<bean id="pawnerProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.PawnerServiceImpl">
+				<property name="pawnerDAO" ref="pawnerDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/pawnerService" class="com.m4.pawning.web.action.PawnerAction" parent="masterAction">
+		<property name="pawnerService" ref="pawnerProxy"/>
+	</bean>
+
+	<bean id="parameterProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ParameterServiceImpl">
+				<property name="parameterDAO" ref="parameterDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/parameterService" class="com.m4.pawning.web.action.ParameterAction" parent="masterAction">
+		<property name="parameterService" ref="parameterProxy"/>
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="parameterValueProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ParameterValueServiceImpl">
+				<property name="parameterValueDAO" ref="parameterValueDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/parameterValueService" class="com.m4.pawning.web.action.ParameterValueAction" parent="masterAction">
+		<property name="parameterService" ref="parameterProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="parameterValueService" ref="parameterValueProxy"/>
+	</bean>
+
+	<bean id="accountProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AccountServiceImpl">
+				<property name="accountDAO" ref="accountDAO"/>
+				<property name="authorizableDAO" ref="accountDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/accountService" class="com.m4.pawning.web.action.AccountAction" parent="masterAction">
+		<property name="accountService" ref="accountProxy"/>
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="ticketProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.TicketServiceImpl">
+				<property name="ticketDAO" ref="ticketDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/ticketService" class="com.m4.pawning.web.action.TicketAction" parent="masterAction">
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="articleModelService" ref="articleModelProxy"/>
+		<property name="articleService" ref="articleProxy"/>
+		<property name="schemeService" ref="schemeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="cartageService" ref="cartageProxy"/>
+		<property name="cartageMarsterService" ref="cartageMarsterProxy"/>
+	</bean>
+
+	<bean id="interestRatesProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.InterestRatesServiceImpl">
+				<property name="interestRatesDAO" ref="interestRatesDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/interestRatesService" class="com.m4.pawning.web.action.InterestRatesAction" parent="masterAction">
+		<property name="interestRatesService" ref="interestRatesProxy"/>
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="schemeProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.SchemeServiceImpl">
+				<property name="schemeDAO" ref="schemeDAO"/>
+				<property name="authorizableDAO" ref="schemeDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/schemeService" class="com.m4.pawning.web.action.SchemeAction" parent="masterAction">
+		<property name="schemeService" ref="schemeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="cartageMarsterService" ref="cartageMarsterProxy"/>
+		<property name="interestRatesService" ref="interestRatesProxy"/>
+	</bean>
+
+	<bean id="cartageProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.CartageServiceImpl">
+				<property name="cartageDAO" ref="cartageDAO"/>
+				<property name="authorizableDAO" ref="cartageDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/cartageService" class="com.m4.pawning.web.action.CartageAction" parent="masterAction">
+		<property name="cartageMarsterService" ref="cartageMarsterProxy"/>
+		<property name="cartageService" ref="cartageProxy"/>
+		<property name="productService" ref="productProxy"/>
+	</bean>
+
+	<bean id="receiptProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ReceiptServiceImpl">
+				<property name="receiptDAO" ref="receiptDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/receiptService" class="com.m4.pawning.web.action.ReceiptAction" parent="masterAction">
+		<property name="receiptService" ref="receiptProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+
+	</bean>
+
+	<bean name="/cancelreceiptService" class="com.m4.pawning.web.action.CancelReceiptAction" parent="masterAction">
+		<property name="receiptService" ref="receiptProxy"/>
+	</bean>
+	
+	<bean name="/waiveoffService" class="com.m4.pawning.web.action.ReceiptAction" parent="masterAction">
+		<property name="receiptService" ref="receiptProxy"/>
+	</bean>
+
+	<bean id="officerProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.OfficerServiceImpl">
+				<property name="officerDAO" ref="officerDAO"/>
+				<property name="authorizableDAO" ref="officerDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/officerService" class="com.m4.pawning.web.action.OfficerAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="userGroupService" ref="userGroupProxy"/>
+		<property name="officerService" ref="officerProxy"/>
+	</bean>
+
+	<bean id="dayEndProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.DayEndServiceImpl">
+				<property name="dayEndDAO" ref="dayEndDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/dayEndService" class="com.m4.pawning.web.action.DayEndAction" parent="masterAction">
+		<property name="dayEndService" ref="dayEndProxy"/>
+	</bean>
+
+	<bean id="fundRequestProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.FundRequestServiceImpl">
+				<property name="fundRequestDAO" ref="fundRequestDAO"/>
+				<property name="branchDAO" ref="branchDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+ 	<bean name="/fundRequestService" class="com.m4.pawning.web.action.FundRequestAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="fundRequestService" ref="fundRequestProxy"/>
+		<property name="officerService" ref="officerProxy"/>
+	</bean>
+
+	<bean id="infoconsoleProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.InfoconsoleServiceImpl">
+				<property name="infoconsoleDAO" ref="infoconsoleDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/infoconsoleService" class="com.m4.pawning.web.action.InfoconsoleAction" parent="masterAction">
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="receiptService" ref="receiptProxy"/>
+	</bean>
+
+	<bean name="/authorizeTicketService" class="com.m4.pawning.web.action.TicketAction" parent="masterAction">
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="articleModelService" ref="articleModelProxy"/>
+		<property name="articleService" ref="articleProxy"/>
+		<property name="schemeService" ref="schemeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="cartageService" ref="cartageProxy"/>
+	</bean>
+
+	<!-- <bean name="/printTicketService" class="com.m4.pawning.web.action.TicketAction" parent="masterAction">
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="articleModelService" ref="articleModelProxy"/>
+		<property name="articleService" ref="articleProxy"/>
+		<property name="schemeService" ref="schemeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="cartageService" ref="cartageProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+	</bean>
+-->
+	<bean id="reminderParaProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ReminderParaServiceImpl">
+				<property name="reminderParaDAO" ref="reminderParaDAO"/>
+				<property name="authorizableDAO" ref="reminderParaDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/reminderParaService" class="com.m4.pawning.web.action.ReminderParaAction" parent="masterAction">
+		<property name="schemeService" ref="schemeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="reminderParaService" ref="reminderParaProxy"/>		
+	</bean>
+
+	<bean name="/reportService" class="com.m4.pawning.web.action.DailyPawningReportAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+	</bean>
+
+	<bean id="ticketRedeemProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.RedeemServiceImpl">
+				<property name="redeemDAO" ref="redeemDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/ticketRedeemService" class="com.m4.pawning.web.action.RedeemAction" parent="masterAction">
+		<property name="redeemService" ref="ticketRedeemProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+	</bean>
+
+	<bean name="/dailypaymentreportService" class="com.m4.pawning.web.action.DailyPaymentReportAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="receiptService" ref="receiptProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="officerService" ref="officerProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+	</bean>
+
+<!-- 	<bean name="/trialbaloutstandingService" class="com.m4.pawning.web.action.TrialBlanceOutstandingReportAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+	</bean> -->
+
+	<bean name="/renewService" class="com.m4.pawning.web.action.RenewAction" parent="masterAction">
+		<property name="redeemService" ref="ticketRedeemProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="schemeService" ref="schemeProxy"/>
+	</bean>
+
+	<bean name="/changePasswordService" class="com.m4.pawning.web.action.ChangePasswordAction" parent="masterAction">
+		<property name="officerService" ref="officerProxy"/>
+		<property name="parameterValueService" ref="parameterValueProxy"/>
+	</bean>
+
+	<bean id="initiateAuctionProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuctionServiceImpl">
+				<property name="auctionDAO" ref="auctionDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/initiateAuctionService" class="com.m4.pawning.web.action.AuctionAction" parent="masterAction">
+		<property name="productService" ref="productProxy"/>
+		<property name="auctionLocation" ref="auctionLocationProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="auctionService" ref="initiateAuctionProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+	</bean>
+
+	<bean id="reminderPrintProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.ReminderServiceImpl">
+				<property name="reminderDAO" ref="reminderDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/reminderPrintService" class="com.m4.pawning.web.action.ReminderPrintAction" parent="masterAction">
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="reminderService" ref="reminderPrintProxy"/>
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+	</bean>
+
+	<bean name="/reminderRePrintService" class="com.m4.pawning.web.action.ReminderPrintAction" parent="masterAction">
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="reminderService" ref="reminderPrintProxy"/>
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+	</bean>
+
+	 <bean id="fundDepositProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.FundDepositServiceImpl">
+				<property name="fundDepositDAO" ref="fundDepositDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+ 	<bean name="/fundDepositService" class="com.m4.pawning.web.action.FundDepositAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="fundDepositService" ref="fundDepositProxy"/>
+		<property name="officerService" ref="officerProxy"/>
+	</bean>
+
+	<bean id="fundDepositReportProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.FundDepositServiceImpl">
+				<property name="fundDepositDAO" ref="fundDepositDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+ 	<bean name="/fundDepositReportService" class="com.m4.pawning.web.action.FundDepositReportAction" parent="masterAction">
+		<property name="branchService" ref="branchProxy"/>
+		<property name="fundDepositService" ref="fundDepositProxy"/>
+		<property name="officerService" ref="officerProxy"/>
+		<property name="companyService" ref="companyProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+	</bean>
+	<bean id="auctionExpencesProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuctionExpencesServiceImpl">
+				<property name="auctionExpencesDAO" ref="auctionExpencesDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+ 	<bean name="/auctionExpencesService" class="com.m4.pawning.web.action.AuctionExpencesAction" parent="masterAction">
+		<property name="auctionExpencesService" ref="auctionExpencesProxy"/>
+		<property name="dueTypeService" ref="dueTypeProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="auctionService" ref="initiateAuctionProxy"></property>
+	</bean>
+
+	<bean id="auctionTicketProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuctionTicketServiceImpl">
+				<property name="auctionTicketDAO" ref="auctionTicketDAO"/>
+				<property name="dueFromDAO" ref="dueFromDAO"/>
+				<property name="dueTypeDAO" ref="dueTypeDAO"/>
+			</bean>
+		</property>
+ 	</bean>
+
+ 	<bean name="/allocateExpencesService" class="com.m4.pawning.web.action.AuctionTicketAction" parent="masterAction">
+		<property name="auctionTicketService" ref="auctionTicketProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+	</bean>
+	<bean id="auctionMarkProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuctionTicketServiceImpl">
+
+			</bean>
+		</property>
+ 	</bean>
+
+	<bean name="/auctionMarkService" class="com.m4.pawning.web.action.AuctionTicketAction" parent="masterAction">
+		<property name="productService" ref="productProxy"/>
+		<property name="auctionLocation" ref="auctionLocationProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+		<property name="auctionService" ref="initiateAuctionProxy"/>
+		<property name="branchService" ref="branchProxy"/>
+		<property name="ticketService" ref="ticketProxy"/>
+		<property name="infoconsoleService" ref="infoconsoleProxy"/>
+	</bean>
+
+	<bean name="/receiptRePrintService" class="com.m4.pawning.web.action.ReceiptRePrintAction" parent="masterAction">
+		<property name="receiptService" ref="receiptProxy"/>
+		<property name="productService" ref="productProxy"/>
+		<property name="pawnerService" ref="pawnerProxy"/>
+	</bean>
+	
+	<bean name="JasperReportService" class="com.m4.core.util.BaseReportAction" parent="masterAction">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+
+	<!-- Staff Pawn Report -->
+	<bean name="/StaffPawnning" parent="JasperReportService"/>
+ 	
+ 	<!-- Pawn Article Sumary Report -->
+	<bean name="/pawnArticleSummary" parent="JasperReportService"/>
+ 
+ 	<!-- Pawning Transaction By Size Report -->
+	<bean name="/pawningTransaction" parent="JasperReportService"/>
+ 
+ 	<!-- Sumary of Interest Report -->
+	<bean name="/summaryOfInterest" parent="JasperReportService"/>
+
+ 	<!-- Business Transaction Report -->
+	<bean name="/businessTransaction" parent="JasperReportService"/>
+
+ 	<!-- Ledger Advance Report -->
+	<bean name="/ledgerAdvance" parent="JasperReportService"/>
+
+ 	<!-- Ledger Interest Report -->
+	<bean name="/ledgerInterest" parent="JasperReportService"/>
+	
+	<!-- Auction Ticket Report -->
+	<bean name="/auctionTicket" parent="JasperReportService"/>
+	
+ 	<!-- Trial Balance Outstanding Report -->
+	<bean name="/trialbaloutstandingService" parent="JasperReportService"/>	
+	<!-- Ticket Print -->
+	<bean name="/printTicketService" parent="JasperReportService"/>	
+	
+	<bean name="/resetPasswordService" class="com.m4.pawning.web.action.ChangePasswordAction" parent="masterAction">
+		<property name="officerService" ref="officerProxy"/>
+		<property name="parameterValueService" ref="parameterValueProxy"/>
+	</bean>
+	<bean id="systemAuditService" class="com.m4.core.util.SystemAuditServiceImpl">
+ 		<property name="systemAuditDAO" ref="systemAuditDAO"/>
+ 	</bean>
+ 	<!-- Audit Trail Service-->
+	<bean id="auditTrailProxy" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.m4.pawning.service.impl.AuditTrailServiceImpl">
+				<property name="auditTrailReadOnlyDAO" ref="auditTrailReadOnlyDAO" />
+				<property name="programAccessDAO" ref="programAccessDAO" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean name="/auditTrail" class="com.m4.pawning.web.action.AuditTrailAction"
+		parent="masterAction">
+		<property name="auditTrailService" ref="auditTrailProxy" />
+	</bean>
+</beans>

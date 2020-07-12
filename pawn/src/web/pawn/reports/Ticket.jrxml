@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket" language="groovy" pageWidth="612" pageHeight="792" columnWidth="610" leftMargin="1" rightMargin="1" topMargin="1" bottomMargin="1">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="jpIntTicketId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Projects\\Pawn\\pmb\\pawn_gl\\pawn\\src\\web\\pawn\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *,(SELECT max(s.rate) FROM tblinterestslabs s
+where s.code = t.INTSLABID and s.nodaysto < 999) as rate
+from tblticket t
+inner join tblpawner p on p.pwnid = t.pwnid
+inner join tblbranch b on b.branchid = t.branchid
+where t.ticketid = $P{jpIntTicketId}]]>
+	</queryString>
+	<field name="TICKETID" class="java.lang.Integer"/>
+	<field name="COMID" class="java.lang.Integer"/>
+	<field name="BRANCHID" class="java.lang.Integer"/>
+	<field name="PRODUCTID" class="java.lang.Integer"/>
+	<field name="TKTNO" class="java.lang.String"/>
+	<field name="SERNO" class="java.lang.String"/>
+	<field name="SCHEMEID" class="java.lang.Integer"/>
+	<field name="CONDATE" class="java.sql.Timestamp"/>
+	<field name="EXPRDATE" class="java.sql.Timestamp"/>
+	<field name="CLODATE" class="java.sql.Timestamp"/>
+	<field name="INTSLABID" class="java.lang.Integer"/>
+	<field name="PERIOD" class="java.lang.Integer"/>
+	<field name="LOCATIONID" class="java.lang.Integer"/>
+	<field name="NOOFITEM" class="java.lang.Integer"/>
+	<field name="NETWEIGHT" class="java.math.BigDecimal"/>
+	<field name="GROSSWEIGHT" class="java.math.BigDecimal"/>
+	<field name="ASSVALUE" class="java.math.BigDecimal"/>
+	<field name="MKTVALUE" class="java.math.BigDecimal"/>
+	<field name="PAWNADV" class="java.math.BigDecimal"/>
+	<field name="SYSRASDVALUE" class="java.math.BigDecimal"/>
+	<field name="REMARKS" class="java.lang.String"/>
+	<field name="TOTINT" class="java.math.BigDecimal"/>
+	<field name="TOTCAP" class="java.math.BigDecimal"/>
+	<field name="TOTINTPAID" class="java.math.BigDecimal"/>
+	<field name="TOTCAPPAID" class="java.math.BigDecimal"/>
+	<field name="STSID" class="java.lang.Integer"/>
+	<field name="ISAUCTIONED" class="java.lang.Integer"/>
+	<field name="TAXAMT1" class="java.math.BigDecimal"/>
+	<field name="TAXAMT2" class="java.math.BigDecimal"/>
+	<field name="USRID" class="java.lang.Integer"/>
+	<field name="RTKTNO" class="java.lang.String"/>
+	<field name="PWNID" class="java.lang.Integer"/>
+	<field name="NOOFPRINT" class="java.lang.Integer"/>
+	<field name="INTMETHOD" class="java.lang.Integer"/>
+	<field name="ISSCHEDULE" class="java.lang.Integer"/>
+	<field name="LASTUPDATE" class="java.sql.Timestamp"/>
+	<field name="LASTUPUSERID" class="java.lang.Integer"/>
+	<field name="RECSTATUS" class="java.lang.Integer"/>
+	<field name="ORIGINALID" class="java.lang.Integer"/>
+	<field name="VERSIONID" class="java.lang.Integer"/>
+	<field name="APPROVEBY" class="java.lang.Integer"/>
+	<field name="MINDAYS" class="java.lang.Integer"/>
+	<field name="AMOUNTINWORDS" class="java.lang.String"/>
+	<field name="PRINTEDTIME" class="java.lang.String"/>
+	<field name="CORI" class="java.lang.String"/>
+	<field name="CLTITLE" class="java.lang.String"/>
+	<field name="INITIALS" class="java.lang.String"/>
+	<field name="INITIALSFULL" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="BRDATE" class="java.sql.Timestamp"/>
+	<field name="NATIONAL" class="java.lang.String"/>
+	<field name="MARISTS" class="java.lang.Integer"/>
+	<field name="IDNO" class="java.lang.String"/>
+	<field name="PPNO" class="java.lang.String"/>
+	<field name="DRVLNO" class="java.lang.String"/>
+	<field name="HOMETPNO" class="java.lang.String"/>
+	<field name="OFFICETPNO" class="java.lang.String"/>
+	<field name="MOBILENO" class="java.lang.String"/>
+	<field name="FAXNO" class="java.lang.String"/>
+	<field name="EMAIL" class="java.lang.String"/>
+	<field name="MAILADDLINE1" class="java.lang.String"/>
+	<field name="MAILADDLINE2" class="java.lang.String"/>
+	<field name="MAILADDLINE3" class="java.lang.String"/>
+	<field name="MAILADDLINE4" class="java.lang.String"/>
+	<field name="INTDTE" class="java.sql.Timestamp"/>
+	<field name="CLSTATUS" class="java.lang.Integer"/>
+	<field name="LASTUPTIME" class="java.lang.String"/>
+	<field name="SEX" class="java.lang.Integer"/>
+	<field name="PAWNCODE" class="java.lang.String"/>
+	<field name="CODE" class="java.lang.String"/>
+	<field name="ADDLINE1" class="java.lang.String"/>
+	<field name="ADDLINE2" class="java.lang.String"/>
+	<field name="ADDLINE3" class="java.lang.String"/>
+	<field name="ADDLINE4" class="java.lang.String"/>
+	<field name="TPNO" class="java.lang.String"/>
+	<field name="TAXNO" class="java.lang.String"/>
+	<field name="ISDEFAULT" class="java.lang.Integer"/>
+	<field name="RCPACC" class="java.lang.String"/>
+	<field name="PMTACC" class="java.lang.String"/>
+	<field name="DATEINSTALL" class="java.sql.Timestamp"/>
+	<field name="FUNDAVAILABLE" class="java.math.BigDecimal"/>
+	<field name="FUNDLIMIT" class="java.math.BigDecimal"/>
+	<field name="SYSDATE" class="java.lang.Integer"/>
+	<field name="BRANCHNAME" class="java.lang.String"/>
+	<field name="rate" class="java.math.BigDecimal"/>
+	<variable name="NumberToWord" class="java.lang.String"/>
+	<group name="Articles">
+		<groupExpression><![CDATA[$F{TICKETID}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="Article1">
+		<groupExpression><![CDATA[$F{TICKETID}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="750" splitType="Stretch">
+			<subreport>
+				<reportElement x="280" y="615" width="200" height="20"/>
+				<subreportParameter name="jpIntTicketId">
+					<subreportParameterExpression><![CDATA[$P{jpIntTicketId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Ticket_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="10" y="156" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="191" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="98" width="100" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BRANCHNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="222" width="100" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{IDNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="146" width="26" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CLTITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="146" width="180" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="168" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="146" width="53" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INITIALS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="180" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="497" y="28" width="81" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{CONDATE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="282" y="245" width="23" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="99" width="100" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TKTNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="245" width="77" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ASSVALUE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="517" y="277" width="77" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PAWNADV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="222" width="152" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REMARKS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="548" y="245" width="53" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{CONDATE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="182" y="740" width="77" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PAWNADV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="246" width="23" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{PERIOD}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="344" y="106" width="200" height="20"/>
+				<subreportParameter name="jpIntTicketId">
+					<subreportParameterExpression><![CDATA[$P{jpIntTicketId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Ticket_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="48" y="593" width="100" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BRANCHNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="176" y="593" width="78" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TKTNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="665" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="631" width="53" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INITIALS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="631" width="180" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="631" width="26" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CLTITLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="653" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="676" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="641" width="259" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAILADDLINE1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="277" width="481" height="10"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AMOUNTINWORDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="484" y="534" width="100" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRINTEDTIME}.substring(10)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

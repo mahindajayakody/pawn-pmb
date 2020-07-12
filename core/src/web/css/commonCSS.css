@@ -1,0 +1,237 @@
+BODY {
+	MARGIN: 0px;
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Trebuchet MS ;
+}
+TD {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Trebuchet MS;
+}
+th {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Trebuchet MS;
+}
+
+input{
+	font-size: 12px;
+	font-family: Trebuchet MS;	
+	background-color: #deecfd; 
+	border: #8bb8f3 1px solid;
+	height:22px;
+	padding:2px;
+}
+
+select{
+	font-size: 12px;
+	font-family: Trebuchet MS;
+	background-color: #deecfd; 
+	border: #8bb8f3 1px solid;
+	height:20px;
+}
+
+.READONLYINPUT {
+	font-size:12px;
+	font-family:Trebuchet MS;
+	background-color:#C6C0AE;
+	border:1px solid #000000;
+	color:#FFFFFF;	
+	height:22px;
+	font-weight:bold;
+
+}
+
+.labelTextbox{
+	 background-color:#c6c0ae;
+ 	 border:1px solid #b3ac9b;
+ 	 padding:2px 2px 2px 2px;
+     font-family:Tahoma;
+     font-weight:bold;
+     font-size:12px;
+     color:#ffffff;
+     height:22px;
+ }
+
+TEXTAREA{
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Trebuchet MS;
+}
+
+legend{
+	color:#0066CC;
+}
+
+
+div.validate{
+	 background-position:top;
+     background-color:#EBF8FF; 
+     padding: 0px 0px 0px 0px; 
+     color: red;
+     position: absolute ;
+     font-family: Trebuchet MS;
+     font-size:11px;
+}
+
+.searchTextbox{
+ 	background-color:#ece9d8;
+ 	border:1px solid #ece9d8;
+ 	padding:2px 2px 2px 2px;
+ 	font-family:Tahoma;
+ 	font-size:12px;
+ 	color:#000000;
+	height:22px;
+ }
+
+.GridColumn{
+    FONT-SIZE: 11px;
+    FONT-FAMILY: Trebuchet MS;
+	WIDTH:150px;
+}
+.GridSelect{
+    FONT-SIZE: 10px;
+    FONT-FAMILY: Trebuchet MS;
+    WIDTH:40px;
+    vertical-align:top;
+}
+.GridNavigator{
+	FONT-SIZE: 10px;
+	FONT-FAMILY: Trebuchet MS;
+}
+
+.astric{
+	color:red;
+	font-weight:bold
+}
+
+table.InputTable { 
+    border: #91a7b4 1px solid;
+    width: 740px;
+	background-color: white;    
+}
+
+table.TabInputTable { 
+    border-top: #91a7b4 1px solid;
+    BORDER-RIGHT: #91a7b4 1px solid;
+    BORDER-LEFT: #91a7b4 1px solid;
+    WIDTH: 735px;
+    BORDER-BOTTOM: #91a7b4 1px solid;
+    background-color:#f9f9ef;
+}
+
+table.toolTable { 
+	border-top: #91a7b4 1px solid;
+    border-right: #91a7b4 1px solid;
+    border-left: #91a7b4 1px solid;
+    border-bottom: #91a7b4 1px solid;
+    width: 745px;
+    height:25px;
+    bottom: 0px;
+    position: fixed;
+}
+
+.GridColor{
+	FONT-SIZE: 10px;
+	FONT-FAMILY: Trebuchet MS;
+	BACKGROUND-COLOR: #ece9d8;
+	
+}
+
+div.enableAll{
+	width: 0px;
+	height: 0px;
+	visibility: hidden;
+	position:absolute;
+	z-index: 0;
+}
+div.disableAll{
+	width:745px;
+	background-color:#87C0F7;
+	position: absolute;
+	height: 560px;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);
+	vertical-align: middle;
+	visibility: visible;
+	z-index: 65535;
+	background-position: center;
+	background-image: url(images/default/shared/full-loading.gif);
+	background-repeat: no-repeat;
+}
+
+/* TAB CSS - End .................................................................. */
+input.buttonNormal#Processing {
+	background-image: url('../images/button/EN/processing.gif');
+	padding-right:25px
+}
+
+input.buttonNormal#Check {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Authorize {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Reject {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Approve {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Print {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Clear {
+	background-image: url('../images/button/EN/grp_button.gif');
+	border:medium none;
+	color:#000000;
+	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	height:19px;
+	vertical-align:middle;
+	width:93px;
+}
+
+input.buttonNormal#Normal {
+	background-image: url('../images/button/EN/normal.gif');				
+}
+			
+

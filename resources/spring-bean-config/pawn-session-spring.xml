@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	    <property name="entityInterceptor">
+			<ref local="auditTrailIntercepter"/>
+		</property>
+
+		<property name="dataSource" ref="dataSource"/>
+		
+		<property name="hibernateProperties" ref="hibernateProperties"/>
+			
+   		<property name="annotatedClasses">
+     		<list>
+     			<value>com.m4.pawning.domain.SystemProgram</value>
+     			<value>com.m4.pawning.domain.TicketStatus</value>
+     			<value>com.m4.pawning.domain.Location</value>
+     			<value>com.m4.pawning.domain.DueType</value>
+     			<value>com.m4.pawning.domain.PawnerType</value>
+     			<value>com.m4.pawning.domain.ClosureType</value>
+     			<value>com.m4.pawning.domain.Company</value>
+     			<value>com.m4.pawning.domain.Branch</value>
+     			<value>com.m4.pawning.domain.UserGroup</value>
+     			<value>com.m4.pawning.domain.CartageMarster</value>
+     			<value>com.m4.pawning.domain.ArticleModel</value>
+     			<value>com.m4.pawning.domain.AuctionLocation</value>
+     			<value>com.m4.pawning.domain.ProgramAccess</value>
+     			<value>com.m4.pawning.domain.Product</value>
+     			<value>com.m4.pawning.domain.Article</value>
+     			<value>com.m4.pawning.domain.Pawner</value>
+     			<value>com.m4.pawning.domain.Parameter</value>
+     			<value>com.m4.pawning.domain.ParameterValue</value>
+     			<value>com.m4.pawning.domain.GlAccount</value>
+     			<value>com.m4.pawning.domain.Ticket</value>
+     			<value>com.m4.pawning.domain.InterestRates</value>
+     			<value>com.m4.pawning.domain.Schemes</value>
+     			<value>com.m4.pawning.domain.Cartage</value>
+     			<value>com.m4.pawning.domain.TicketArticle</value>
+     			<value>com.m4.pawning.domain.DueFrom</value>
+     			<value>com.m4.pawning.domain.InterestSlab</value>
+     			<value>com.m4.pawning.domain.DueTo</value>
+     			<value>com.m4.core.bean.Serial</value>
+     			<value>com.m4.core.bean.SerialMaster</value>
+     			<value>com.m4.pawning.domain.FundRequest</value>
+     			<value>com.m4.pawning.domain.MapPawner</value>
+     			<value>com.m4.pawning.domain.Receipt</value>
+     			<value>com.m4.pawning.domain.Officer</value>
+     			<value>com.m4.pawning.domain.SystemDate</value>
+     			<value>com.m4.pawning.domain.DueReceipt</value>
+     			<value>com.m4.pawning.domain.TicketRedeem</value>
+     			<value>com.m4.pawning.domain.ReminderPara</value>
+     			<value>com.m4.pawning.domain.Reminder</value>
+     			<value>com.m4.pawning.domain.AuctionMaster</value>
+     			<value>com.m4.pawning.domain.FundDeposit</value>
+     			<value>com.m4.pawning.domain.Ledger</value>
+     			<value>com.m4.core.bean.UserLog</value>
+     			<value>com.m4.core.bean.EventLog</value>
+     			<value>com.m4.pawning.domain.DailyInterst</value>     			
+     			<value>com.m4.pawning.domain.AuctionExpences</value>
+     			<value>com.m4.pawning.domain.AuctionTicket</value>
+     			<value>com.m4.core.bean.AccessBranch</value>
+     			<value>com.m4.pawning.domain.CancelDueReceipt</value>
+     			<value>com.m4.pawning.domain.OverPayment</value>
+     			<value>com.m4.pawning.domain.CribData</value>
+     			<value>com.m4.pawning.domain.OfficerHistory</value>
+     			<value>com.m4.core.bean.AuditTrail</value>
+     		</list>
+		</property>		
+	</bean>	
+	<bean id="auditSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		
+		<property name="dataSource" ref="dataSource"/>
+		
+		<property name="hibernateProperties" ref="hibernateProperties"/>
+
+		<property name="annotatedClasses">
+     		<list>
+ 				<value>com.m4.core.bean.AuditTrail</value>
+      		</list>
+		</property>
+			
+	</bean>	
+
+	<bean id="auditTrailIntercepter" class="com.m4.core.util.AuditTrailIntercepter">
+		<property name="auditTrailDAO" ref="auditTrailDAO"/>
+	</bean>
+</beans>

@@ -1,0 +1,247 @@
+<?xml version="1.0"?> 
+
+<project name="pawn" default="create-components" basedir="." >
+	
+	<property environment="env"/>
+
+	<!--Build/Generated Directory   -->
+	<property name="pawn.src.dir"			    value="pawn/src/java"/>	
+	<property name="core.src.dir"				value="core/src/java"/>
+	<property name="build.dir" 					value="target"/>
+	
+	<property name="classes.dir" 				value="${build.dir}/classes"/>
+	<property name="resources.dir"				value="resources"/>
+	<property name="common.lib.dir"				value="${resources.dir}/lib"/>
+	<property name="common.config"				value="${resources.dir}/config"/>	
+	<property name="dist.dir"					value="${build.dir}/dist"/>	
+	
+	<property name="tomcat.home" 				value="C:/tomcat/apache-tomcat-pawn"/>
+	<property name="tomcat.deploy.dir"			value="${tomcat.home}/webapps"/>
+	<property name="tomcat.work.dir"			value="${tomcat.home}/work/Catalina/localhost/pawn"/>
+	
+	<property name="war-name"					value="pawn.war"/>
+	<property name="coreweb.dir" 				value="core/src/web"/>
+	<property name="pawnweb.dir" 			    value="pawn/src/web"/>
+	<property name="meta-inf.dir"				value="${build.dir}/config"/>	
+	<property name="tld.dir"					value="${common.lib.dir}/tlds"/>	
+	<property name="web.inf.dir"				value="${coreweb.dir}/WEB-INF"/>	
+	
+	<property name="eclipse.class.path"			value="bin"/>					
+	<property name="spring.resources.dir"		value="${resources.dir}/spring-bean-config"/>			
+			
+		
+	<!--Spring/Hibernate jars-->
+	<path id="commpon.lib.classpath">
+		<fileset dir="${common.lib.dir}">
+			<include name="**/*.jar"/>
+		</fileset>			
+	</path>
+	
+	<path id="module.build.classpath"> 
+		<pathelement path="."/>
+		<pathelement path="${classes.dir}"/>
+		<path refid="commpon.lib.classpath"/> 
+	</path>		
+	
+	<target name="init">
+		
+		<echo message="##################################################################"/>		
+		<echo message="#                        Initializing....                        #"/>		
+		<echo message="##################################################################"/>				
+		
+		<delete dir="${classes.dir}"/>
+		<delete dir="${dist.dir}"/>		
+		
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${dist.dir}"/>		
+				
+	</target>
+	<path id="jasper.lib.classpath">
+		<fileset dir="${common.lib.dir}">
+			<include name="jasperreports-4.0.1.jar" />
+			<include name="commons-logging-1.1.jar" />
+			<include name="commons-digester-1.8.jar" />
+			<include name="commons-collections-3.2.jar" />
+			<include name="commons-beanutils-core.jar" />
+			<include name="groovy-all-1.7.5.jar" />
+		</fileset>
+	</path>
+	<taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask">
+		<classpath refid="jasper.lib.classpath" />
+	</taskdef>
+	<target name="compileJasper">
+		<echo message="##################################################################" />
+		<echo message="#                     Building Jasper Reports                    #" />
+		<echo message="##################################################################" />
+
+		<jrc destdir="${pawnweb.dir}" tempdir="${pawnweb.dir}" keepjava="false" xmlvalidation="true">
+			<src>
+				<fileset dir="${pawnweb.dir}">
+					<include name="**/*.jrxml" />
+				</fileset>
+			</src>
+			<classpath refid="jasper.lib.classpath" />
+		</jrc>
+	</target>
+	
+
+	<target name="compile" depends="init">
+	 	
+		<echo message="##################################################################"/>		
+		<echo message="#                        Compiling...                            #"/>		
+		<echo message="##################################################################"/>		
+		
+		
+		<javac srcdir="${core.src.dir}" destdir="${classes.dir}" classpathref="module.build.classpath" debug="yes">
+			<include name="**/*.java"/>
+		</javac>			
+		
+		<javac srcdir="${pawn.src.dir}" destdir="${classes.dir}" classpathref="module.build.classpath" debug="yes">
+			<include name="**/*.java"/>
+		</javac>	
+	</target> 
+	
+	<target name="clean-components">
+		<!-- <delete dir="${tomcat.work.dir}"/>
+		<delete dir="${tomcat.deploy.dir}/pawn"/>-->
+	</target>
+	
+	<target name="create-components" depends="compile,clean-components,compileJasper">
+	
+		<echo message="##################################################################"/>
+		<echo message="#                     Building Components...                     #"/>
+		<echo message="##################################################################"/>
+		
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		
+		
+		<war destfile="${dist.dir}/${war-name}" webxml="${web.inf.dir}/web.xml">
+						
+			<fileset dir="${common.config}" 	includes="*.properties"/>						
+			
+			<classes dir="${resources.dir}" 	includes="resources/properties/*.properties"/>
+			<classes dir="${classes.dir}" 		includes="**/*.class"/>			
+			<classes dir="${pawn.src.dir}"   	includes="log4j.xml"/>						
+						 
+			<fileset dir="${coreweb.dir}">
+				<include name="*.jsp"/>	
+				<include name="*.htm"/>
+				<include name="*.html"/>	
+				<include name="*.swf"/>
+            	<include name="**/images/tree/*.*"/>				
+				<include name="**/images/*.*"/>				
+				<include name="**/images/button/**/*.*"/>
+				<include name="**/images/default/**/*.*"/>				
+				<include name="**/xp/*.css"/>
+				<include name="**/xp/*.png"/>
+				<include name="**/xp/*.gif"/>				
+				<include name="**/css/*.css"/>
+				<include name="**/*.xml"/>
+				<include name="**/flash/*.swf"/>
+				<include name="**/sounds/*.mp3"/>
+				<include name="**/js/*.js"/>
+			</fileset>
+			
+			<fileset dir="${pawnweb.dir}">
+				<include name="**/*.jsp"/>
+				<!--<include name="**/*.jasper"/>-->
+				<include name="**/*.jrxml"/>
+			</fileset>
+			
+            <webinf dir="${web.inf.dir}">
+                <include name="pawn-struts-config.xml"/>
+                <include name="validation.xml"/>
+                <include name="validator-rules.xml"/>                	
+            	<include name="**/*.tld"/>
+            </webinf>	
+			
+			<webinf dir="${spring.resources.dir}" includes="*.xml"/>
+		</war>
+		
+		<copy todir="${tomcat.deploy.dir}" file="${dist.dir}/${war-name}"/>	
+		
+		<echo message="##############---FINISH---###############"/>
+	</target>
+	
+	<target name="deploy-Pre Compile">
+		<echo message="##################################################################"/>
+		<echo message="#                     Building Pre Compiled Components...        #"/>
+		<echo message="##################################################################"/>
+		
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+
+		<war destfile="${dist.dir}/${war-name}" webxml="${web.inf.dir}/web.xml">
+						
+			<fileset dir="${common.config}" 	includes="*.properties"/>						
+			
+			<classes dir="${resources.dir}"		includes="resources/properties/*.properties"/>
+			<classes dir="${classes.dir}" 		includes="**/*.class"/>			
+			<classes dir="${pawn.src.dir}"   includes="log4j.properties"/>						
+						 
+			<fileset dir="${coreweb.dir}">
+				<include name="*.jsp"/>
+				<include name="*.htm"/>
+				<include name="*.html"/>
+				<include name="*.swf"/>
+				<include name="**/images/button/**/*.gif"/>
+            	<include name="**/images/tree/*.gif"/>				
+				<include name="**/images/*.jpg"/>				
+				<include name="**/images/*.gif"/>						
+				<include name="**/images/*.png"/>
+				<include name="**/images/default/*.*"/>
+   				<include name="**/images/default/**/*.*"/>
+				<include name="**/xp/*.css"/>
+				<include name="**/xp/*.png"/>
+				<include name="**/xp/*.gif"/>				
+				<include name="**/css/*.css"/>
+				<include name="**/flash/*.swf"/>
+				<include name="**/js/*.js"/>
+			</fileset>
+			
+			<fileset dir="${pawnweb.dir}">
+				<include name="**/*.jsp"/>
+				<include name="**/*.jasper"/>
+			</fileset>
+
+            <webinf dir="${web.inf.dir}">
+                <include name="pawn-struts-config.xml"/>
+                <include name="validation.xml"/>
+                <include name="validator-rules.xml"/>                	
+            	<include name="**/*.tld"/>
+            </webinf>	
+			
+			<webinf dir="${spring.resources.dir}" includes="*.xml"/>
+		</war>	
+		
+		<copy todir="/${tomcat.deploy.dir}" file="${dist.dir}/${war-name}"/>	
+		<!--<copy todir="G:/Tomcat 6.0/webapps" file="${dist.dir}/${war-name}"/>-->
+		<echo message="##############---FINISH---###############"/>
+	</target>
+	
+	<target name="deploy-jsps">
+		<echo message="##################################################################"/>
+		<echo message="#                        JSP Deploying....                       #"/>		
+		<echo message="##################################################################"/>
+		
+		
+    	<copy todir="${tomcat.deploy.dir}" >
+			<fileset dir="${coreweb.dir}">
+				<include name="**/*.*"/>
+				<exclude name="**/Thumbs.db"/>
+			</fileset>
+    		<fileset dir="${pawnweb.dir}">
+				<include name="**/*.jsp"/>
+ 				<include name="**/*.jasper"/>
+    			<include name="**/*.html"/>
+			</fileset>
+	   	</copy>
+	</target>	
+	
+	<target name="build" depends="create-components">
+		<copy todir="${tomcat.deploy.dir}" file="${dist.dir}/${war-name}"/>	
+		<!--<copy todir="G:/Tomcat 6.0/webapps" file="${dist.dir}/${war-name}"/>-->
+		<echo message="##############---FINISH---###############"/>
+	</target>
+</project>

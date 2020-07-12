@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="exceptionInterceptor" class="com.m4.core.exception.ExceptionInterceptor"/>
+	
+	<bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>	
+		
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="mappedNames">
+			<list>
+				<value>create*</value>
+				<value>update*</value>
+				<value>remove*</value>
+				<value>cancel*</value>
+				<value>get*</value>	
+				<value>do*</value>
+				<value>authorize*</value>
+				<value>approve*</value>
+				<value>redeem*</value>
+			</list>
+		</property>
+		<property name="advice" ref="exceptionInterceptor"/>
+	</bean>	
+	
+	<bean id="transactionAttributeSource" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource"> 
+		<property name="properties">
+			<props>	
+				<prop key="get*">
+					PROPAGATION_SUPPORTS,readOnly
+				</prop>						
+				<prop key="create*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="update*">
+					PROPAGATION_REQUIRED
+				</prop>				
+				<prop key="remove*">
+					PROPAGATION_REQUIRED
+				</prop>	
+				<prop key="do*">
+					PROPAGATION_REQUIRED
+				</prop>	
+				<prop key="authorize*">
+					PROPAGATION_REQUIRED
+				</prop>	
+				<prop key="approve*">
+					PROPAGATION_REQUIRED
+				</prop>		
+				<prop key="redeem*">
+					PROPAGATION_REQUIRED
+				</prop>																
+			</props>
+		</property>		
+	</bean>			
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">	
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"  abstract="true" lazy-init="true">
+	
+   		<property name="transactionManager" ref="transactionManager"/>
+   		   		
+   		<property name="transactionAttributeSource" ref="transactionAttributeSource"/>
+
+   		<property name="preInterceptors">
+   			<list>
+				<ref bean="pointcutAdvisor"/>
+   			</list>
+   		</property>
+   		<property name="postInterceptors">
+   			<list>
+				<ref bean="hibernateInterceptor"/>
+   			</list>
+   		</property>
+   		<!--Force to use CGLIB proxy instead of JDK dynamic proxy for better performance-->
+   		<property name="proxyTargetClass" value="true"/> 
+ 	</bean>
+ 	
+ 	<bean id="systemAuditDAO" class="com.m4.core.util.SystemAuditDAOImpl">
+ 		<property name="sessionFactory" ref="mySessionFactory"/>
+ 	</bean>
+ 	
+ 	<bean id="systemAuditService" class="com.m4.core.util.SystemAuditServiceImpl">
+ 		<property name="systemAuditDAO" ref="systemAuditDAO"/>
+ 	</bean>
+ 	
+ 	<bean id="masterAction" class="com.m4.core.util.MasterAction" abstract="true">
+ 		<property name="systemAuditService" ref="systemAuditService"/>
+ 	</bean>		
+ 	
+</beans>

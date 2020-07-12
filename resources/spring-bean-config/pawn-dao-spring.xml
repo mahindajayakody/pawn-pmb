@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="systemProgramDAO" class="com.m4.pawning.dao.impl.SystemProgramDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="ticketStatusDAO" class="com.m4.pawning.dao.impl.TicketStatusDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="locationDAO" class="com.m4.pawning.dao.impl.LocationDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="dueTypeDAO" class="com.m4.pawning.dao.impl.DueTypeDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="pawnerTypeDAO" class="com.m4.pawning.dao.impl.PawnerTypeDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="closureTypeDAO" class="com.m4.pawning.dao.impl.ClosureTypeDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="companyDAO" class="com.m4.pawning.dao.impl.CompanyDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="branchDAO" class="com.m4.pawning.dao.impl.BranchDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="userGroupDAO" class="com.m4.pawning.dao.impl.UserGroupDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="articleModelDAO" class="com.m4.pawning.dao.impl.ArticleModelDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="auctionLocationDAO" class="com.m4.pawning.dao.impl.AuctionLocationDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="productDAO" class="com.m4.pawning.dao.impl.ProductDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="programAccessDAO" class="com.m4.pawning.dao.impl.ProgramAccessDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="cartageMarsterDAO" class="com.m4.pawning.dao.impl.CartageMarsterDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="articleDAO" class="com.m4.pawning.dao.impl.ArticleDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="pawnerDAO" class="com.m4.pawning.dao.impl.PawnerDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="parameterDAO" class="com.m4.pawning.dao.impl.ParameterDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="parameterValueDAO" class="com.m4.pawning.dao.impl.ParameterValueDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="accountDAO" class="com.m4.pawning.dao.impl.AccountDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="ticketDAO" class="com.m4.pawning.dao.impl.TicketDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="interestRatesDAO" class="com.m4.pawning.dao.impl.InterestRatesDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="schemeDAO" class="com.m4.pawning.dao.impl.SchemeDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="cartageDAO" class="com.m4.pawning.dao.impl.CartageDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="receiptDAO" class="com.m4.pawning.dao.impl.ReceiptDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="officerDAO" class="com.m4.pawning.dao.impl.OfficerDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="dayEndDAO" class="com.m4.pawning.dao.impl.DayEndDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="fundRequestDAO" class="com.m4.pawning.dao.impl.FundRequestDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="infoconsoleDAO" class="com.m4.pawning.dao.impl.InfoconsoleDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="redeemDAO" class="com.m4.pawning.dao.impl.RedeemDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+
+	<bean name="reminderParaDAO" class="com.m4.pawning.dao.impl.ReminderParaDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean name="auctionDAO" class="com.m4.pawning.dao.impl.AuctionDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="fundDepositDAO" class="com.m4.pawning.dao.impl.FundDepositDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean name="reminderDAO" class="com.m4.pawning.dao.impl.ReminderDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean name="auctionExpencesDAO" class="com.m4.pawning.dao.impl.AuctionExpencesDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean name="auctionTicketDAO" class="com.m4.pawning.dao.impl.AuctionTicketDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="dueFromDAO" class="com.m4.pawning.dao.impl.DueFromDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="systemAuditDAO" class="com.m4.core.util.SystemAuditDAOImpl">
+ 		<property name="sessionFactory" ref="mySessionFactory"/>
+ 	</bean>
+ 	<bean id="auditTrailDAO" class="com.m4.core.util.AuditTrailDAOImpl">
+ 		<property name="sessionFactory" ref="auditSessionFactory"/>
+	</bean>
+	<bean id="auditTrailReadOnlyDAO" class="com.m4.pawning.dao.impl.AuditTrailReadOnlyDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+</beans>

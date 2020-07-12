@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation>
+
+<!--
+     This is a minimal Validator form file with a couple of examples.
+-->
+	<global>
+		<constant>
+	        <constant-name>referenceCodeMin2</constant-name>
+	        <constant-value>2</constant-value>
+	    </constant>
+
+		<constant>
+	        <constant-name>referenceCodeMin</constant-name>
+	        <constant-value>3</constant-value>
+	    </constant>
+
+	    <constant>
+	        <constant-name>referenceCodeMin4</constant-name>
+	        <constant-value>4</constant-value>
+	    </constant>
+
+	    <constant>
+            <constant-name>CodeStrInt</constant-name>
+            <constant-value>^[0-9a-zA-Z\s.\^\$\*\?~`!@#%\(\)\-\_|/:;,']*$</constant-value>
+        </constant>
+	</global>
+
+
+    <formset>
+
+    	<!-- validation for Article Status Bean-->
+		<form name="article">
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product"/>
+			</field>
+			<field property="artModelCode" depends="required">
+				<arg bundle="lable" key="screen.articlemodel"/>
+			</field>
+			<field property="code" depends="required,minlength">
+				<arg bundle="lable" key="screen.code"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+    	<!-- validation for Ticket Status Bean-->
+		<form name="ticketstatus">
+			<field property="code" depends="required,minlength">
+				<arg bundle="lable" key="screen.code"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for Location Bean-->
+		<form name="location">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for DueType Bean-->
+		<form name="duetype">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="productcode" depends="required">
+				<arg bundle="lable" key="screen.productcode" />
+			</field>
+		</form>
+
+		<!-- validation for PawnerType Bean-->
+		<form name="pawnertype">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for ClosureType Bean-->
+		<form name="closuretype">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for company Bean-->
+		<form name="company">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="name" depends="required">
+				<arg bundle="lable" key="screen.companyname" />
+			</field>
+			<field property="addLine1" depends="required">
+				<arg bundle="lable" key="screen.addressline1" />
+			</field>
+			<field property="addLine2" depends="required">
+				<arg bundle="lable" key="screen.addressline2" />
+			</field>
+			<field property="telephoneNo" depends="required">
+				<arg bundle="lable" key="screen.telephoneno" />
+			</field>
+			<field property="faxNo" depends="required">
+				<arg bundle="lable" key="screen.faxno" />
+			</field>
+			<field property="taxNo" depends="required">
+				<arg bundle="lable" key="screen.taxno" />
+			</field>
+			<field property="dateInstalled" depends="required">
+				<arg bundle="lable" key="screen.dateinstalled" />
+			</field>
+			<field property="finBeginDate" depends="required">
+				<arg bundle="lable" key="screen.financebegindate" />
+			</field>
+			<field property="finEndDate" depends="required">
+				<arg bundle="lable" key="screen.financeenddate" />
+			</field>
+		</form>
+
+
+		<!-- validation for branch Bean-->
+		<form name="branch">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="comCode" depends="required">
+				<arg bundle="lable" key="screen.companyname" />
+			</field>
+			<field property="addLine1" depends="required">
+				<arg bundle="lable" key="screen.addressline1" />
+			</field>
+			<field property="addLine2" depends="required">
+				<arg bundle="lable" key="screen.addressline2" />
+			</field>
+			<field property="telephoneNo" depends="required">
+				<arg bundle="lable" key="screen.telephoneno" />
+			</field>
+			<field property="faxNo" depends="required">
+				<arg bundle="lable" key="screen.faxno" />
+			</field>
+			<field property="taxNo" depends="required">
+				<arg bundle="lable" key="screen.taxno" />
+			</field>
+			<field property="dateInstalled" depends="required">
+				<arg bundle="lable" key="screen.dateinstalled" />
+			</field>
+			<field property="receiptAccount" depends="required">
+				<arg bundle="lable" key="screen.receiptaccount" />
+			</field>
+			<field property="paymentAccount" depends="required">
+				<arg bundle="lable" key="screen.paymentaccount" />
+			</field>
+			<field property="branchName" depends="required">
+				<arg bundle="lable" key="screen.paymentaccount" />
+			</field>
+		</form>
+
+		<!-- validation for UserGroup Bean-->
+		<form name="usergroup">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength4" key="${var:minlength4}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin4}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for CartageMarster Bean-->
+		<form name="cartagemarster">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for articale Model Bean-->
+		<form name="articalemodel">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+		</form>
+
+		<!-- validation for Auction Location Bean-->
+		<form name="auctionlocation">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for Product Bean-->
+		<form name="product">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin2}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for ProgramAccess Bean-->
+		<form name="programaccess">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin4}</var-value>
+                </var>
+			</field>
+		</form>
+
+		<!-- validation for Pawner Bean-->
+		<form name="pawner">
+			<!-- <field property="idOrBrNo" depends="validWhenNIC">
+				<arg bundle="lable" key="screen.nicnumberorbr" />
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>((comOrIndiv != "I") or (*this* !=null))</var-value>
+       			 </var>
+			</field> -->
+			<field property="initials" depends="validwhen">
+				<arg bundle="lable" key="screen.initial" />
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>((comOrIndiv != "I") or (*this* !=null))</var-value>
+       			 </var>
+			</field>
+			<field property="initialsInFull" depends="validwhen">
+				<arg bundle="lable" key="screen.initialsinfull" />
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>((comOrIndiv != "I") or (*this* !=null))</var-value>
+       			 </var>
+			</field>
+			<field property="surName" depends="validwhen">
+				<arg bundle="lable" key="screen.surname" />
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>((comOrIndiv != "I") or (*this* !=null))</var-value>
+       			 </var>
+			</field>
+			<field property="companyName" depends="validwhen">
+				<arg bundle="lable" key="screen.companyname" />
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>((comOrIndiv == "I") or (*this* !=null))</var-value>
+       			 </var>
+			</field>
+			<field property="addressLine1" depends="required">
+				<arg bundle="lable" key="screen.addressline1" />
+			</field>
+			<field property="addressLine4" depends="required">
+				<arg bundle="lable" key="screen.town" />
+			</field>
+		</form>
+
+		<!-- validation for Parameter Bean-->
+		<form name="parameter">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+		</form>
+
+		<!-- validation for Parameter Value Bean-->
+		<form name="parameterValue">
+			<field property="effDate" depends="required">
+				<arg bundle="lable" key="screen.effdate" />
+			</field>
+			<field property="paraValue" depends="required">
+				<arg bundle="lable" key="screen.paravalue" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+			<field property="parameterCode" depends="required">
+				<arg bundle="lable" key="screen.paracode" />
+			</field>
+		</form>
+
+		<!-- validation for GlAccount Bean-->
+		<form name="account">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="accountCode" depends="required">
+				<arg bundle="lable" key="screen.accountcode" />
+			</field>
+			<field property="drCr" depends="required">
+				<arg bundle="lable" key="screen.drcr" />
+			</field>
+		</form>
+
+		<!-- validation for Interest Rates Bean-->
+		<form name="interestrates">
+			<field property="code" depends="required,mask,minlength3">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+		</form>
+
+
+		<!-- validation for Schemes Bean-->
+		<form name="schemes">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+			<field property="cartageMarsterCode" depends="required">
+				<arg bundle="lable" key="screen.code" />
+			</field>
+			<field property="interestCode" depends="required">
+				<arg bundle="lable" key="screen.interestCode" />
+			</field>
+			<field property="period" depends="required,nonZeroInt">
+				<arg bundle="lable" key="screen.period" />
+			</field>
+		</form>
+
+		<!-- validation for Cartage Bean-->
+		<form name="cartage">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="disbursePercentage" depends="required">
+				<arg bundle="lable" key="screen.disbursePercentage" />
+			</field>
+			<field property="disburseValue" depends="required">
+				<arg bundle="lable" key="screen.disburseValue" />
+			</field>
+			<field property="displayValue" depends="required">
+				<arg bundle="lable" key="screen.displayValue" />
+			</field>
+			<field property="marcketValue" depends="required">
+				<arg bundle="lable" key="screen.marcketValue" />
+			</field>
+			<field property="isActive" depends="required">
+				<arg bundle="lable" key="screen.isactive" />
+			</field>
+		</form>
+
+		<!-- validation for Cartage Bean-->
+		<form name="ticket">
+			<field property="pawnerCode" depends="required">
+				<arg bundle="lable" key="screen.clientname" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+			<field property="schemeCode" depends="required">
+				<arg bundle="lable" key="screen.scheme" />
+			</field>
+			<field property="totPawnAdvance" depends="required,nonZeroDou">
+				<arg bundle="lable" key="screen.pawnadvanace" />
+			</field>
+		</form>
+
+		<!-- validation for Receipt Bean-->
+		<form name="receipt">
+			<field property="ticketNumber" depends="required">
+				<arg bundle="lable" key="screen.tiketno" />
+			</field>
+			<field property="receiptamt" depends="required,nonZeroDou">
+				<arg bundle="lable" key="screen.receiptamt" />
+			</field>
+		</form>
+
+
+		<!-- validation for Cancel Receipt Bean-->
+		<form name="cancelreceipt">
+			<field property="receiptno" depends="required">
+				<arg bundle="lable" key="screen.receiptno" />
+			</field>
+			<field property="ticketNumber" depends="required">
+				<arg bundle="lable" key="screen.tiketno" />
+			</field>
+		</form>
+
+		<!-- validation for Cancel Receipt Bean-->
+		<form name="officer">
+			<field property="pawnerCode" depends="required">
+				<arg bundle="lable" key="screen.officer" />
+			</field>
+			<field property="branchCode" depends="required">
+				<arg bundle="lable" key="screen.branch" />
+			</field>
+			<field property="userGroupCode" depends="required">
+				<arg bundle="lable" key="screen.usergroup" />
+			</field>
+
+			<field property="userName" depends="required">
+				<arg bundle="lable" key="screen.username" />
+			</field>
+			<field property="password" depends="required">
+				<arg bundle="lable" key="screen.password" />
+			</field>
+			<field property="confirmPassword" depends="required">
+				<arg bundle="lable" key="screen.conpassword" />
+			</field>
+		</form>
+
+		<!-- validation for Redeem Bean-->
+		<form name="redeem">
+			<field property="ticketNumber" depends="required">
+				<arg bundle="lable" key="screen.tiketno" />
+			</field>
+		</form>
+
+		<!-- validation for Passwordchange Bean-->
+		<form name="passwordchange">
+			
+			<field property="password" depends="required">
+				<arg bundle="lable" key="screen.newpassword" />
+			</field>
+			<field property="confirmPassword" depends="required">
+				<arg bundle="lable" key="screen.conpassword" />
+
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>(newPassword==*this*)</var-value>
+       			 </var>
+			</field>
+		</form>
+		<!-- validation for Reset Password Bean-->
+		<form name="resetpassword">
+			<field property="oldPassword" depends="required">
+				<arg bundle="lable" key="screen.oldpassword" />
+			</field>
+			<field property="newPassword" depends="required">
+				<arg bundle="lable" key="screen.newpassword" />
+			</field>
+			<field property="confirmPassword" depends="required">
+				<arg bundle="lable" key="screen.conpassword" />
+
+				<var>
+         			 <var-name>test</var-name>
+         			 <var-value>(newPassword==*this*)</var-value>
+       			 </var>
+			</field>
+		</form>
+
+
+		<!-- validation for Reminder Parameter Bean-->
+		<form name="reminderParameter">
+			<field property="code" depends="required,mask,minlength">
+				<arg bundle="lable" key="screen.code" />
+				<arg1 name="minlength" key="${var:minlength}" resource="false"/>
+				<var>
+                    <var-name>mask</var-name>
+                    <var-value>${CodeStrInt}</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>${referenceCodeMin4}</var-value>
+                </var>
+			</field>
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product" />
+			</field>
+		</form>
+
+		<!-- validation for Initiate Auction Bean-->
+		<form name="auction">
+			<field property="productCode" depends="required">
+				<arg bundle="lable" key="screen.product"/>
+			</field>
+			<field property="branchCode" depends="required">
+				<arg bundle="lable" key="screen.branch"/>
+			</field>
+			<field property="code" depends="required">
+				<arg bundle="lable" key="screen.code" />
+			</field>
+
+			<field property="description" depends="required">
+				<arg bundle="lable" key="screen.description" />
+			</field>
+			<!--
+			<field property="pawnerCode" depends="required">
+				<arg bundle="lable" key="screen.auctioneename" />
+			</field>
+			<field property="pawnerCode2" depends="required">
+				<arg bundle="lable" key="screen.officername" />
+			</field>
+			 -->
+			<field property="auctionDate" depends="required">
+				<arg bundle="lable" key="screen.auctiondate" />
+			</field>
+			<field property="locationCode" depends="required">
+				<arg bundle="lable" key="screen.auctionlocation" />
+			</field>
+
+		</form>
+    </formset>
+</form-validation>

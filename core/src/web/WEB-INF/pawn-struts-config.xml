@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC  "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+     
+<struts-config>
+	<form-beans>
+		<!-- Example mapping  -->			
+		
+		<form-bean name="customer" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="initials" 		type="java.lang.String" 	initial=""/>
+			<form-property name="lastName" 		type="java.lang.String" 	initial=""/>
+			<form-property name="action" 		type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Ticket Status -->
+		<form-bean name="ticketstatus" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Location -->
+		<form-bean name="location" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+				 
+		<!-- DueType -->
+		<form-bean name="duetype" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>
+			<form-property name="productcode" 			type="java.lang.String" 	initial=""/>						
+			<form-property name="sequenceno" 			type="java.lang.String" 	initial="0"/>
+			<form-property name="accountno" 			type="java.lang.String" 	initial="0"/>
+		</form-bean>
+		
+		<!-- DueType -->
+		<form-bean name="pawnertype" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>		
+		
+		<!-- ClosureType -->
+		<form-bean name="closuretype" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean> 
+		
+		<!-- User Company -->
+		<form-bean name="company" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="name" 					type="java.lang.String" 	initial=""/>
+			<form-property name="addLine1" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine2" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine3" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine4" 				type="java.lang.String" 	initial=""/>
+			<form-property name="telephoneNo"			type="java.lang.String" 	initial=""/>
+			<form-property name="faxNo" 				type="java.lang.String" 	initial=""/>
+			<form-property name="taxNo" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="dateInstalled"			type="java.lang.String" 	initial=""/>
+			<form-property name="finBeginDate"			type="java.lang.String" 	initial=""/>
+			<form-property name="finEndDate"			type="java.lang.String" 	initial=""/>
+			<form-property name="authmode"				type="java.lang.Integer" 	initial=""/>
+		</form-bean> 
+		
+		<!-- User Branch -->
+		<form-bean name="branch" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="companyId" 			type="java.lang.Integer" 	initial=""/>
+			<form-property name="comCode" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine1" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine2" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine3" 				type="java.lang.String" 	initial=""/>
+			<form-property name="addLine4" 				type="java.lang.String" 	initial=""/>
+			<form-property name="telephoneNo"			type="java.lang.String" 	initial=""/>
+			<form-property name="faxNo" 				type="java.lang.String" 	initial=""/>
+			<form-property name="taxNo" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="isDefault" 			type="java.lang.Integer" 	initial=""/>
+			<form-property name="receiptAccount"		type="java.lang.String" 	initial=""/>
+			<form-property name="paymentAccount"		type="java.lang.String" 	initial=""/>
+			<form-property name="dateInstalled"			type="java.lang.String" 	initial=""/>
+			<form-property name="fundLimit"				type="java.lang.String" 	initial=""/>
+			<form-property name="fundavailable"			type="java.lang.String" 	initial=""/>
+			<form-property name="branchName"			type="java.lang.String" 	initial=""/>
+			<form-property name="email"					type="java.lang.String" 	initial=""/>
+		</form-bean> 
+		
+		<!-- User Group -->
+		<form-bean name="usergroup" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Cartage Marster -->
+		<form-bean name="cartagemarster" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Articale Model -->
+		<form-bean name="articalemodel" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Auction Location  -->
+		<form-bean name="auctionlocation" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Product  -->
+		<form-bean name="product" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="scheme" 				type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Program Access -->		
+		<form-bean name="programaccess" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="dataList" 		type="java.util.List"/>
+			<form-property name="action" 		type="java.lang.String" 	initial=""/>
+			<form-property name="code" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Article -->
+		<form-bean name="article" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="artModelCode" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Pawner -->
+		<form-bean name="pawner" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="initials" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="initialsInFull" 		type="java.lang.String" 	initial=""/>			
+			<form-property name="surName" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="dateOfBirth" 			type="java.lang.String" 	initial=""/>
+			<form-property name="nationality" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="idOrBrNo" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="pasportNo" 			type="java.lang.String" 	initial=""/>
+			<form-property name="drivingLicenseNumber" 	type="java.lang.String" 	initial=""/>
+			<form-property name="homeTelephoneNo" 		type="java.lang.String" 	initial=""/>			
+			<form-property name="officeTelephoneNo" 	type="java.lang.String" 	initial=""/>			
+			<form-property name="mobileNo" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="faxNo" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="emailAddress" 			type="java.lang.String" 	initial=""/>
+			<form-property name="addressLine1" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="addressLine2" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="addressLine3" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="addressLine4" 			type="java.lang.String" 	initial=""/>
+			<form-property name="introduceDate"			type="java.lang.String" 	initial=""/>						
+			<form-property name="companyName"			type="java.lang.String" 	initial=""/>
+			<form-property name="comOrIndiv"			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Parameter -->
+		<form-bean name="parameter" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+
+		<!-- Parameter Value -->
+		<form-bean name="parameterValue" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="effDate" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="paraValue" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="parameterCode" 		type="java.lang.String" 	initial=""/>
+			<form-property name="dataType" 				type="java.lang.String" 	initial=""/>
+		</form-bean>
+
+		<!-- GlAccount-->
+		<form-bean name="account" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="accountCode"			type="java.lang.String" 	initial=""/>			
+			<form-property name="drCr"   	 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Ticket-->
+		<form-bean name="ticket" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="pawnerCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="schemeCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="articleCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="articleModCode" 		type="java.lang.String" 	initial=""/>
+			<form-property name="cartageCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="disbursement" 			type="java.lang.Double" 	initial=""/>
+			<form-property name="productCode"	 		type="java.lang.String" 	initial=""/>
+			<form-property name="totPawnAdvance"	 	type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"	 		type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Interest Rates -->
+		<form-bean name="interestrates" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Schemes -->
+		<form-bean name="schemes" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="cartageMarsterCode" 	type="java.lang.String" 	initial=""/>	
+			<form-property name="interestCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="period" 				type="java.lang.Integer" 	initial=""/>					
+		</form-bean>
+		
+		<!-- Cartage-->
+		<form-bean name="cartage" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="disburseValue"			type="java.lang.Long" 		initial=""/>
+			<form-property name="disbursePercentage"	type="java.lang.Long" 		initial=""/>
+			<form-property name="displayValue"			type="java.lang.String"		initial=""/>
+			<form-property name="marcketValue"			type="java.lang.Long" 		initial=""/>
+			<form-property name="isActive"				type="java.lang.String"		initial=""/>
+			<form-property name="cartageMasterCode"  	type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>		
+		
+		<!-- Receipt -->
+		<form-bean name="receipt" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>	
+			<form-property name="receiptamt" 			type="java.lang.String"		initial=""/>
+		</form-bean>
+		
+		<!-- Cancel Receipt -->
+		<form-bean name="cancelreceipt" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="receiptno" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Fund Request-->
+		<form-bean name="fundRequest" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="requestNo" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="requestDate" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="requestAmount"			type="java.lang.Long" 		initial=""/>
+			<form-property name="branchCode" 			type="java.lang.String" 	initial=""/>						
+			<form-property name="pawnerId"  			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Officer -->
+		<form-bean name="officer" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="branchCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="pawnerCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="userGroupCode"			type="java.lang.String" 	initial=""/>			
+			<form-property name="userName"	 			type="java.lang.String" 	initial=""/>
+			<form-property name="password"	 			type="java.lang.String" 	initial=""/>
+			<form-property name="confirmPassword"		type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- DayEnd -->
+		<form-bean name="dayend" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- InfoConsole -->
+		<form-bean name="infoconsole" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- DailyPawn Report -->
+		<form-bean name="dailypawnreport" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="beginDate"				type="java.lang.String" 	initial=""/>
+			<form-property name="endDate"				type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Daily Payment Report -->
+		<form-bean name="dailypaymentreport" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="beginDate"				type="java.lang.String" 	initial=""/>
+			<form-property name="endDate"				type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Ticket Redeem -->
+		<form-bean name="redeem" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Password Change -->
+		<form-bean name="passwordchange" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="password"  			type="java.lang.String" 	initial=""/>
+			<form-property name="confirmPassword"	    	type="java.lang.String" 	initial=""/>
+			
+		</form-bean>
+		
+		<!-- Trial Balance Outstanding Report -->
+		<form-bean name="trialbalanceoutstandingreport" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="beginDate"				type="java.lang.String" 	initial=""/>
+			<form-property name="endDate"				type="java.lang.String" 	initial=""/>							
+		</form-bean>
+		
+		<!-- Reminder Parameter-->
+		<form-bean name="reminderParameter" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="noOfDays"			    type="java.lang.String" 	initial=""/>
+			<form-property name="isSendToNominee"   	type="java.lang.String" 	initial=""/>
+			<form-property name="schemeCode"  			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		<!-- Auction -->
+		<form-bean name="auction" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="auctionDate"		    type="java.lang.String" 	initial=""/>
+			<form-property name="branchCode"  			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>	
+			<form-property name="pawnerCode"			type="java.lang.String" 	initial=""/>
+			<form-property name="pawnerCode2"     		type="java.lang.String" 	initial=""/>
+			<form-property name="locationCode"			type="java.lang.String" 	initial=""/> 
+					
+				
+		</form-bean>
+		
+		<!-- Ticket Renew -->
+		<form-bean name="renew" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		
+		<!-- Reminder Print -->
+		<form-bean name="reminderprint" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>
+			<form-property name="description" 			type="java.lang.String"		initial=""/>	
+			<form-property name="recordId"			    type="java.lang.Integer" 	initial=""/>			
+			
+		</form-bean>
+		
+		<!-- Reminder Re-Print -->
+		<form-bean name="reminderreprint" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="recordId"			    type="java.lang.Integer" 	initial=""/>			
+			<form-property name="code"					type="java.lang.String" 	initial=""/>	
+			<form-property name="description" 			type="java.lang.String"		initial=""/>
+		</form-bean>
+		<!-- Fund Deposit-->
+		<form-bean name="funddeposit" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="depositno" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="depositdate" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="depositamount"			type="java.lang.Long" 		initial=""/>
+			<form-property name="branchCode" 			type="java.lang.String" 	initial=""/>						
+		</form-bean>
+		
+		<!-- Fund Deposit Report-->
+		<form-bean name="fundDepositReport" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="depositno" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="depositdate" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="depositamount"			type="java.lang.Long" 		initial=""/>
+			<form-property name="branchCode" 			type="java.lang.String" 	initial=""/>						
+		</form-bean>
+		
+		<!-- Auction Expences-->
+		<form-bean name="auctionexpences" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="dueTypeCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="auctionCode" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>
+			<form-property name="amount" 			   	type="java.lang.String" 	initial=""/>			
+		</form-bean>	
+		<!-- Allocate Expences -->
+		<form-bean name="allocateexpences" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>
+			<form-property name="code"					type="java.lang.String" 	initial=""/>	
+			<form-property name="description" 			type="java.lang.String"		initial=""/>
+			<form-property name="recordId"			    type="java.lang.Integer" 	initial=""/>			
+			<form-property name="auctionId"			    type="java.lang.Integer" 	initial=""/>
+		</form-bean>
+		
+		<!-- Auction Mark -->
+		<form-bean name="auctionMark" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="code" 					type="java.lang.String" 	initial=""/>			
+			<form-property name="description" 			type="java.lang.String" 	initial=""/>			
+			<form-property name="auctionDate"		    type="java.lang.String" 	initial=""/>
+			<form-property name="branchCode"  			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>	
+			<form-property name="pawnerCode"			type="java.lang.String" 	initial=""/>
+			<form-property name="pawnerCode2"     		type="java.lang.String" 	initial=""/>
+			<form-property name="auctionCode"     		type="java.lang.String" 	initial=""/>	
+			<form-property name="upsetvalue" 			type="java.lang.String" 	initial=""/> 	
+		</form-bean>
+		
+		<!-- Staff Pawn Report Form-->
+		<form-bean name="staffPawnningReport" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="date"				type="java.lang.String" 	initial=""/>	
+			<form-property name="action" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+
+		<!-- Pawn Article Sumary Report Form-->
+		<form-bean name="pawnArticleSummary" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="date"				type="java.lang.String" 	initial=""/>	
+			<form-property name="action" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Pawning Transaction By Size Report Form-->
+		<form-bean name="pawningTransaction" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="fromDate"		type="java.lang.String" 	initial=""/>	
+			<form-property name="toDate"			type="java.lang.String" 	initial=""/>
+			<form-property name="action" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+
+		<!-- Sumary Of Interest Report Form-->
+		<form-bean name="summaryOfInterest" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="fromDate"		type="java.lang.String" 	initial=""/>	
+			<form-property name="toDate"			type="java.lang.String" 	initial=""/>
+			<form-property name="action" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+				
+		<!--BusinessTransaction Report Form-->
+		<form-bean name="businessTransaction" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="action" 	  type="java.lang.String" 	initial=""/>
+			<form-property name="asAtDate"	  type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!--Ledger Advance Report Form-->
+		<form-bean name="ledgerAdvance" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="action" 	  type="java.lang.String" 	initial=""/>
+			<form-property name="jpFromDate"  type="java.lang.String" 	initial=""/>
+			<form-property name="jpToDate"	  type="java.lang.String" 	initial=""/>
+		</form-bean>
+
+		<!--Ledger Interest Report Form-->
+		<form-bean name="ledgerInterest" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="action" 	  type="java.lang.String" 	initial=""/>
+			<form-property name="jpFromDate"  type="java.lang.String" 	initial=""/>
+			<form-property name="jpToDate"	  type="java.lang.String" 	initial=""/>
+		</form-bean>
+		
+		<!-- Auction Tickets Report Form-->
+		<form-bean name="auctionTicket" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="fromDate"		type="java.lang.String" 	initial=""/>	
+			<form-property name="toDate"		type="java.lang.String" 	initial=""/>
+			<form-property name="action" 		type="java.lang.String" 	initial=""/>
+		</form-bean>		
+		<!-- Waive Off -->
+		<form-bean name="waiveoff" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="ticketNumber"			type="java.lang.String" 	initial=""/>			
+			<form-property name="productCode" 			type="java.lang.String" 	initial=""/>	
+			<form-property name="receiptamt" 			type="java.lang.String"		initial=""/>
+		</form-bean>
+		<!--Trial Balance Outstanding Report Form-->
+		<form-bean name="trialbaloutstandingService" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="action" 	  type="java.lang.String" 	initial=""/>
+			<form-property name="fromDate"	  type="java.lang.String" 	initial=""/>
+			<form-property name="toDate"	  type="java.lang.String" 	initial=""/>
+			<form-property name="tiketstatus" type="java.lang.String" 	initial=""/>
+		</form-bean>	
+		<!-- Reset Password  -->
+		<form-bean name="resetpassword" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+			<form-property name="oldPassword"			type="java.lang.String" 	initial=""/>			
+			<form-property name="newPassword" 			type="java.lang.String" 	initial=""/>
+			<form-property name="confirmPassword" 		type="java.lang.String" 	initial=""/>			
+		</form-bean>
+		<!-- Audit Trail Request -->
+		<form-bean name="auditTrail" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>
+			<form-property name="officerCode" 			type="java.lang.String" 	initial=""/>
+		</form-bean>
+		<!-- Send Mail -->
+		<form-bean name="sendmail" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+			<form-property name="datalist" 				type="java.util.List"/>
+			<form-property name="action" 				type="java.lang.String" 	initial=""/>			
+		</form-bean>
+					
+	</form-beans>
+		
+	
+	<global-forwards>  
+	   	<forward name="sessionError" 	path="/invalidSession.html"/>
+		<forward name="commonCSS"    	path="css/commonCSS.css"/>
+		<forward name="dtreeCSS"    	path="css/dtree.css"/>
+		<forward name="awCSS"    		path="css/xp/aw.css"/>
+		<forward name="calendarCSS"    	path="css/calendar-system.css"/>
+		
+		<forward name="commonJS"     	path="js/common.js"/>
+		<forward name="dTreeJS" 		path="js/dtree.js"/>
+		<forward name="moduleDTreeJS" 	path="js/moduleDtree.js"/>
+		<forward name="ajaxJS"     	 	path="js/ajax.js"/>
+		<forward name="tabJS"  	 	 	path="js/tab.js"/>
+		<forward name="awJS"  	 		path="js/aw.js"/>
+		<forward name="accessDTreeJS" 	path="js/accessDTree.js"/>
+		<forward name="calendarJS"  	path="js/calendar.js"/>
+	</global-forwards> 	
+	
+	<action-mappings>	
+	
+       <!--LoginProcess   -->   
+		<action path="/loginProcess"
+		    type="org.springframework.web.struts.DelegatingActionProxy"		    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/index.jsp"
+		    scope="request">
+		    <forward name="page" path="/MainWindow.jsp"/>
+		</action>
+		
+		<!--TicketStatus   -->   
+		<action path="/ticketStatusService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="ticketstatus"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/TicketStatus.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--Location   -->   
+		<action path="/locationService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="location"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Location.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--DueType  -->   
+		<action path="/dueTypeService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="duetype"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/DueType.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--DueType  -->   
+		<action path="/pawnerTypeService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="pawnertype"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/PawnerType.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--Closuretype  -->   
+		<action path="/closureTypeService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="closuretype"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ClosureType.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--Company  -->   
+		<action path="/companyService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="company"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/UserCompany.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--Company  -->   
+		<action path="/branchService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="branch"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/UserBranch.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--UserGroup  -->   
+		<action path="/userGroupService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="usergroup"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/UserGroup.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--CartageMarster  -->   
+		<action path="/cartageMarsterService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="cartagemarster"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/CartageMarster.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--ArticaleModel  -->   
+		<action path="/articleModelService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="articalemodel"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ArticleModel.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!--AuctionLocation  -->   
+		<action path="/auctionLocationService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="auctionlocation"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AuctionLocation.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Product  -->   
+		<action path="/productService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="product"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Product.jsp"
+		    scope="request">		    
+		</action>
+		
+		 <!--Program Access    -->   
+		<action path="/programAccessService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="programaccess"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ProgramAccess.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Article -->   
+		<action path="/articleService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="article"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Article.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Pawner -->   
+		<action path="/pawnerService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="pawner"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Pawner.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Parameter -->   
+		<action path="/parameterService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="parameter"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Parameter.jsp"
+		    scope="request">		    
+		</action>
+
+		<!-- Parameter Value -->   
+		<action path="/parameterValueService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="parameterValue"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ParameterValue.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- GlAccount-->   
+		<action path="/accountService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="account"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Account.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Ticket-->   
+		<action path="/ticketService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="ticket"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Ticket.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Interest Rates -->   
+		<action path="/interestRatesService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="interestrates"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/InterestRates.jsp"
+		    scope="request">		    
+		</action>
+		
+	    <!-- Schemes -->   
+		<action path="/schemeService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="schemes"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Schemes.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Cartage-->   
+		<action path="/cartageService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="cartage"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Cartage.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Receipt -->   
+		<action path="/receiptService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="receipt"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Receipt.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Cancel Receipt -->   
+		<action path="/cancelreceiptService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="cancelreceipt"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/CancelReceipt.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Fund Request-->   
+		<action path="/fundRequestService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="fundRequest"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/FundRequest.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Officer -->   
+		<action path="/officerService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="officer"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Officer.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- DayEnd -->   
+		<action path="/dayEndService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="dayend"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/DayEnd.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Infoconsole -->
+		<action path="/infoconsoleService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="infoconsole"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/InfoConsole.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Ticket Authorize -->   
+		<action path="/authorizeTicketService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="ticket"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AuthorizeTicket.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Ticket Authorize -->   
+		<action path="/printTicketService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="ticket"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/PrintTicket.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- DailyPawn Report -->   
+		<action path="/reportService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="dailypawnreport"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/DailyPawnReport.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Ticket Redeem -->   
+		<action path="/ticketRedeemService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="redeem"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Redeem.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Ticket Renew -->   
+		<action path="/renewService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="renew"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ReNewTicket.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Password Change -->   
+		<action path="/changePasswordService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="passwordchange"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ChangePassword.jsp"
+		    scope="request">		    
+		</action>
+
+		<!-- Trial Balance Outstanding Report -->   
+		             
+		<action path="/trialbaloutstandingService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="trialbaloutstandingService"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/TBOutReport.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Daily Payment Report -->   
+		<action path="/dailypaymentreportService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="dailypaymentreport"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/DailyPaymentReport.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Reminder Parameter -->   
+		<action path="/reminderParaService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="reminderParameter"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ReminderParameter.jsp"
+		    scope="request">		    
+		</action>
+
+		<!-- Initiate Auction  -->   
+		<action path="/initiateAuctionService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="auction"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/Auction.jsp"
+		    scope="request">		    
+		</action>
+		
+		
+		<!-- Reminder Print  -->   
+		<action path="/reminderPrintService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="reminderprint"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ReminderPrint.jsp"
+		    scope="request">		    
+		</action>
+
+
+		<!-- Reminder Re-Print  -->   
+		<action path="/reminderRePrintService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="reminderreprint"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ReminderRePrint.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Fund Deposit-->   
+		<action path="/fundDepositService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="funddeposit"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/FundDeposit.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!-- Fund Deposit Report-->   
+		<action path="/fundDepositReportService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="fundDepositReport"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/FundDepositReport.jsp"
+		    scope="request">		    
+		</action>	
+		<!-- Auction Expences-->   
+		<action path="/auctionExpencesService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="auctionexpences"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AuctionExpences.jsp"
+		    scope="request">		    
+		</action>	
+		<!-- Allocate Expences-->   
+		<action path="/allocateExpencesService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="allocateexpences"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AllocateExpences.jsp"
+		    scope="request">		    
+		</action>	
+		
+		<!--  Auction Mark -->   
+		<action path="/auctionMarkService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"	
+		    name="auctionMark"	    
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AuctionMark.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Receipt Re-Print-->   
+		<action path="/receiptRePrintService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="receipt"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ReceiptRePrint.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Staff Pawnning Details Report -->   
+		<action path="/StaffPawnning"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="staffPawnningReport"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/StaffPawnningDetailsReport.jsp"
+		    scope="request">		    
+		</action>
+
+		<!-- Pawn ArticleSummary Report -->   
+		<action path="/pawnArticleSummary"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="pawnArticleSummary"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/PawnArticleSummaryReport.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Pawning Transaction By Size Report -->   
+		<action path="/pawningTransaction"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="pawningTransaction"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/PawningTransaction.jsp"
+		    scope="request">		    
+		</action>		
+
+		<!-- Sumary Of Interest Report -->   
+		<action path="/summaryOfInterest"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="summaryOfInterest"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/SummaryOfInterest.jsp"
+		    scope="request">		    
+		</action>		
+		
+		<!-- Pawning Business Transaction Summary Report -->   
+		<action path="/businessTransaction"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="businessTransaction"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/BusinessTransaction.jsp"
+		    scope="request">		    
+		</action>		
+
+		<!-- Ledger Advance Report -->   
+		<action path="/ledgerAdvance"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="ledgerAdvance"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/LedgerAdvance.jsp"
+		    scope="request">		    
+		</action>		
+
+		<!-- Ledger Interest Report -->   
+		<action path="/ledgerInterest"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="ledgerInterest"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/LedgerInterest.jsp"
+		    scope="request">		    
+		</action>
+		
+		<!-- Auction Tickets Report -->   
+		<action path="/auctionTicket"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="auctionTicket"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/AuctionTicket.jsp"
+		    scope="request">		    
+		</action>
+		<!-- Waive Off -->   
+		<action path="/waiveoffService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="waiveoff"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/WaiveOff.jsp"
+		    scope="request">		    
+		</action>
+		<!-- Reset Password  -->   
+		<action path="/resetPasswordService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="resetpassword"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/ResetPassword.jsp"
+		    scope="request">		    
+		</action>
+		<!--Audit Trail -->   
+		<action path="/auditTrail"
+		    type="org.springframework.web.struts.DelegatingActionProxy"		    
+		    validate="false"
+		    name="auditTrail"
+		    parameter="dispatch"
+		    input="/pawn/AuditTrail.jsp"
+		    scope="request">		    
+		</action>	
+		<!-- Send Mail -->   
+		<action path="/senMailService"
+		    type="org.springframework.web.struts.DelegatingActionProxy"
+		    name="sendmail"
+		    validate="false"
+		    parameter="dispatch"
+		    input="/pawn/SendMail.jsp"
+		    scope="request">		    
+		</action>	
+				
+	</action-mappings>
+
+	<message-resources parameter="resources/properties/Message"/>
+	<message-resources parameter="resources/properties/Message"          key="message"/>
+	<message-resources parameter="resources/properties/ScreenLable"      key="lable"/>    
+	<message-resources parameter="resources/properties/StandardAction"   key="action"/>    
+	<message-resources parameter="resources/properties/StandardButton"   key="button"/>  
+	
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+	
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation" 
+			value="/WEB-INF/applicationContext.xml"/>
+	</plug-in>
+</struts-config>

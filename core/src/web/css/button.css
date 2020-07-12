@@ -1,0 +1,244 @@
+input.buttonNormal {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/normal.gif');
+  border: medium none;
+  cursor: hand;
+  width:90px;
+  height:22px;
+}
+
+input.dot3buttonNormal {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  /*background-image: url('resources/dot3.gif');*/
+  background-image: url('../images/dot3.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+
+input.gridbuttonNormal {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/gridclear.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+/* next ......................................................................*/
+input.first {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/first.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.first_d {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/first_d.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.last {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/last.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.last_d {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/last_d.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.previous {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/previous.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.previous_d {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/previous_d.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.next {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/next.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+input.next_d {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/button/EN/next_d.gif');
+  border: medium none;
+  cursor: hand;
+  width:26px;
+  height:22px;
+}
+/* next.................................................................. */
+
+input.buttonNormal#dot3down {
+  background-image: url('../images/dot3.gif');
+}
+
+input.gridbuttonNormal#obj_gridclear {
+  background-image: url('../images/button/EN/gridclear.gif');
+  padding-right:20px
+}
+input.buttonNormal#Processing {
+  background-image: url('../images/button/EN/processing.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#AddNew {
+  background-image: url('../images/button/EN/add.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#Modify {
+  background-image: url('../images/button/EN/modify.gif');
+  padding-right:20px
+}
+input.buttonNormal#Delete {
+  background-image: url('../images/button/EN/delete.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#Save {
+  background-image: url('../images/button/EN/save.gif');
+  padding-right:20px
+}
+/*
+input.gridbuttonNormal#first {
+  background-image: url('../images/button/EN/first.gif');
+  padding-right:20px
+}
+input.gridbuttonNormal#last {
+  background-image: url('../images/button/EN/last.gif');
+  padding-right:20px
+}
+
+input.gridbuttonNormal#previous {
+  background-image: url('../images/button/EN/previous.gif');
+  padding-right:20px
+}
+
+input.gridbuttonNormal#next {
+  background-image: url('../images/button/EN/next.gif');
+  padding-right:20px
+}
+*/
+
+input.buttonNormal#Clear {
+  background-image: url('../images/button/EN/clear.gif');
+  padding-right:20px
+}
+input.buttonNormal#Version {
+  background-image: url('../images/button/EN/version.gif');
+  padding-right:20px
+}
+input.buttonNormal#save-all {
+  background-image: url('../images/button/EN/save-all.gif');
+  padding-right:20px
+}
+input.buttonNormal#Print {
+  background-image: url('../images/button/EN/print.gif');
+  padding-right:20px
+}
+input.buttonNormal#Exit {
+  background-image: url('../images/button/EN/exit.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#Search,input.buttonNormal#obj_Search,input.buttonNormal#obj1_Search,input.buttonNormal#obj2_Search{
+  background-image: url('../images/button/EN/search.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#Check {
+  background-image: url('../images/button/EN/check.gif');
+  padding-right:20px
+}
+
+input.buttonNormal#Cancel {
+  background-image: url('../images/button/EN/cancel.gif');
+  padding-right:20px
+}
+
+input.movebuttonNormal {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/normal_move.gif');
+  border: medium none;
+  cursor: hand;
+  width:40px;
+  height:30px;
+}
+
+input.updownbuttonNormal {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size:13px;
+  font-weight:bold;
+  color: #000000;
+  background-color: #e4e4f5;
+  background-image: url('../images/normal_updown.gif');
+  border: medium none;
+  cursor: hand;
+  width:12px;
+  height:25px;
+}
+
+input.updownbuttonNormal#btnDown{
+	line-height:300%;
+	text-align:center;
+}

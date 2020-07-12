@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif"/>
+	<style name="Row"/>
+	<parameter name="jpUserName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT distinct tblticket.tktno,
+     tblticket.`condate`,
+     tblticket.`pawnadv`,
+     tblticket.`tktno`,
+     tblcartage.`CODE` AS tblcartage_CODE,
+     tblticket.`MKTVALUE` AS mktvalue,
+     tblticket.`NETWEIGHT` AS netweight,
+     tblduefrom.`BALAMOUNT` AS tblduefrom_BALAMOUNT,
+     tblpawner.`NAME` AS tblpawner_NAME,
+     tblpawner.`INITIALS` AS tblpawner_INITIALS,
+     tblpawner.`CLTITLE` AS tblpawner_CLTITLE,
+(select compname from tblusercompany ) as comp
+FROM
+     `tblticket` tblticket
+     INNER JOIN `tblticketarticle` tblticketarticle ON tblticket.`TICKETID` = tblticketarticle.`TICKETID`
+     INNER JOIN `tblduefrom` tblduefrom ON tblticket.`TICKETID` = tblduefrom.`TICKETID`
+     INNER JOIN `tblpawner` tblpawner ON tblticket.`PWNID` = tblpawner.`PWNID`
+     INNER JOIN `tblmappawner` tblmappawner ON tblpawner.`PWNID` = tblmappawner.`PWNID`
+     INNER JOIN `tblcartage` tblcartage ON tblticketarticle.`CARTAGEID` = tblcartage.`CARTAGEID`
+WHERE
+     tblduefrom.`duetypeid` = 1
+ AND tblmappawner.pawtypeid = 1]]>
+	</queryString>
+	<field name="tktno" class="java.lang.String"/>
+	<field name="condate" class="java.sql.Timestamp"/>
+	<field name="pawnadv" class="java.math.BigDecimal"/>
+	<field name="tblcartage_CODE" class="java.lang.String"/>
+	<field name="mktvalue" class="java.math.BigDecimal"/>
+	<field name="netweight" class="java.math.BigDecimal"/>
+	<field name="tblduefrom_BALAMOUNT" class="java.math.BigDecimal"/>
+	<field name="tblpawner_NAME" class="java.lang.String"/>
+	<field name="tblpawner_INITIALS" class="java.lang.String"/>
+	<field name="tblpawner_CLTITLE" class="java.lang.String"/>
+	<field name="comp" class="java.lang.String"/>
+	<sortField name="tblcartage_CODE"/>
+	<variable name="pawnadv_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{pawnadv}]]></variableExpression>
+	</variable>
+	<variable name="tblticketarticle_MARVALUE_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{mktvalue}]]></variableExpression>
+	</variable>
+	<variable name="tblduefrom_BALAMOUNT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tblduefrom_BALAMOUNT}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73" splitType="Stretch">
+			<textField>
+				<reportElement x="81" y="56" width="100" height="15"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jpUserName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm.ss a">
+				<reportElement style="Column header" x="181" y="42" width="100" height="14" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="3" width="163" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{comp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="56" width="78" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[User Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="41" width="78" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="2" y="25" width="163" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Staff Pawn Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="167" y="3" width="164" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pawning System - Mahinda]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="81" y="41" width="100" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="153" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="0" width="73" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adv. Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="88" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advanced Amt.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="543" y="0" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cartage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="588" y="0" width="42" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Weight]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="0" width="64" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Market Val]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="694" y="0" width="88" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance Amt.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="6" width="153" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ticket Number]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="-2" y="0" width="804" height="16"/>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="380" y="0" width="73" height="15"/>
+					<textElement textAlignment="Center">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{condate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="454" y="1" width="88" height="15"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pawnadv}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="4" y="1" width="220" height="15"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tblpawner_CLTITLE}+" " +$F{tblpawner_INITIALS}+" " +$F{tblpawner_NAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="224" y="0" width="153" height="14"/>
+					<textElement>
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tktno}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="696" y="3" width="86" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tblduefrom_BALAMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="630" y="3" width="64" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mktvalue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="588" y="3" width="42" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{netweight}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="543" y="2" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tblcartage_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="451" y="3" width="88" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{pawnadv_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="630" y="4" width="64" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tblticketarticle_MARVALUE_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="696" y="4" width="86" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tblduefrom_BALAMOUNT_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
