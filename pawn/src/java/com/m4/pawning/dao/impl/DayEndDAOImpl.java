@@ -237,6 +237,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 				logger.info("End Creating Daily Interest : - " + ticket.getTicketId() + "  Interest Amount= " + interest);
 				
 				logger.info("**** Start Generating Reminders ****");
+				/*Commenting due to Dayend get Delay
 //				if (ticket.getTicketStatusId()==TicketStatusEnum.LAPS.getCode()){
 					Map<String,Reminder> reminderMap=ticket.getReminderMap();
 
@@ -362,8 +363,10 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 						}
 //					}
 					logger.info("**** End Generating Reminders ****");
+					end of Comment */
 				}
 				//CRIB Process	
+				/*Commenting as the dayend get delay  	
 				if (monthEnd.get(Calendar.DAY_OF_MONTH) == 1 && ticket.getProductId() == productList.get(1).getProductId()) {
 					
 					try {
@@ -488,8 +491,8 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 			}
 
 			logger.info("**** End Ledger Posting ****");
-
-
+end of commenting
+*/
 			//Create record for SystemDate
 	        Calendar calendar = Calendar.getInstance();
 			calendar.setTime(userConfig.getLoginDate());
@@ -549,7 +552,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 		ledgerCalanderEnd.set(ledgerCalander.get(Calendar.YEAR), ledgerCalander.get(Calendar.MONTH), ledgerCalander.getActualMaximum(Calendar.DATE));
 		
 		ledgerCalander.add(Calendar.DATE, 1);
-		
+		/* Commenting as DayEnd get Delay
 		if (ledgerCalander.get(Calendar.DAY_OF_MONTH) == 1) {
 		
 			String hql = "select b.code as branchId ,d.CODE as duetypeId, sum(l.crAmount) as crAmount, sum(l.drAmount) as drAmount from tblledger as l " +
@@ -715,7 +718,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 		}
 
 		logger.info("**** End Ledger Entry Printing ****");
-
+*/
 		logger.debug("**** Leaving from doDayEndProcess method ****");
 	}
 
@@ -755,7 +758,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 		passwordNotify.setTime(userConfig.getLoginDate());
 		
 		Calendar passwordExpire =Calendar.getInstance();		
-		
+		/*Commenting due to Dayend Get Delay
 		List<Officer> officers =null;
 		Criteria criteria=getSession().createCriteria(Officer.class);
 		criteria.add(Restrictions.eq("isActive", 1));
@@ -784,6 +787,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 			}
 			
 		}
+		*/
 		
 	}
 }
