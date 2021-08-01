@@ -80,7 +80,6 @@
 			}
 			function getGridData(){
 				data = "dispatch=getAjaxData&conditions=reminderParaId<next>isPrinted&value=" + $('recordId').value + "<next>" + 0;
-				alert(data);
 				var mySearchRequest = new ajaxObject(url);
 				mySearchRequest.callback = function(responseText, responseStatus, responseXML) {
 					if (responseStatus==200) {						

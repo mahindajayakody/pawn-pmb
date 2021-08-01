@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="8.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="816"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="jpUserName" class="java.lang.String"/>
 	<parameter name="jpIntBranchId" class="java.lang.Integer"/>
 	<parameter name="jpFromDate" class="java.util.Date"/>
@@ -34,6 +34,7 @@ where (($P{jpIntStatus}= 0 and (t.STSID= 1 or t.STSID= 4)) or t.STSID=$P{jpIntSt
         p.MAILADDLINE2 as MAILADDLINE2,
         p.MAILADDLINE3 as MAILADDLINE3,
         p.MAILADDLINE4 as MAILADDLINE4 ,
+        p.MOBILENO as MOBILENO,
         (select b.BALAMOUNT from tblduefrom b where b.TICKETID = t.TICKETID and b.DUETYPEID = 1)  as capout,
         (select b.BALAMOUNT from tblduefrom b where b.TICKETID = t.TICKETID and b.DUETYPEID = 2)  as intout,
         (select b.DUEAMOUNT from tblduefrom b where b.TICKETID = t.TICKETID and b.DUETYPEID = 2)  as intdue,
@@ -67,6 +68,7 @@ where  (($P{jpIntStatus}= 0 and (t.STSID= 1 or t.STSID= 4)) or t.STSID=$P{jpIntS
 	<field name="MAILADDLINE2" class="java.lang.String"/>
 	<field name="MAILADDLINE3" class="java.lang.String"/>
 	<field name="MAILADDLINE4" class="java.lang.String"/>
+	<field name="MOBILENO" class="java.lang.String"/>
 	<field name="capout" class="java.math.BigDecimal"/>
 	<field name="intout" class="java.math.BigDecimal"/>
 	<field name="intdue" class="java.math.BigDecimal"/>
@@ -87,7 +89,7 @@ where  (($P{jpIntStatus}= 0 and (t.STSID= 1 or t.STSID= 4)) or t.STSID=$P{jpIntS
 		<variableExpression><![CDATA[$F{MAILADDLINE1} + " " + $F{MAILADDLINE2} + " " + $F{MAILADDLINE3} + " " + $F{MAILADDLINE4}]]></variableExpression>
 	</variable>
 	<variable name="ClientName" class="java.lang.String">
-		<variableExpression><![CDATA[$F{CLTITLE} + " " + $F{INITIALS} + " " + $F{name}]]></variableExpression>
+		<variableExpression><![CDATA[$F{CLTITLE} + " " + $F{INITIALS} + " " + $F{name} + "\n" + $F{MOBILENO}]]></variableExpression>
 	</variable>
 	<variable name="PAWNADV_3" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{PAWNADV}]]></variableExpression>
@@ -369,9 +371,9 @@ Weig]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<line>
-				<reportElement x="7" y="14" width="827" height="1"/>
+				<reportElement x="7" y="30" width="827" height="1"/>
 			</line>
 			<textField>
 				<reportElement x="137" y="0" width="82" height="14"/>
@@ -444,7 +446,7 @@ Weig]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{NOOFITEM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="26" y="0" width="111" height="14"/>
+				<reportElement x="26" y="0" width="111" height="28"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="DejaVu Serif" size="8"/>
 				</textElement>

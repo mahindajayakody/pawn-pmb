@@ -65,6 +65,7 @@
      			<value>com.m4.pawning.domain.CribData</value>
      			<value>com.m4.pawning.domain.OfficerHistory</value>
      			<value>com.m4.core.bean.AuditTrail</value>
+     			
      		</list>
 		</property>		
 	</bean>	

@@ -159,6 +159,7 @@
 			function clearAll(){
 				$('recordId').value    		= '';
 				$('version').value     		= '';
+				$('depositamount').value = "0.00";
 										
 			}
 			
@@ -175,6 +176,7 @@
 			function clearOtherData(){
 				$('recordId').value     = '';
 				$('version').value      = '';
+				$('depositamount').value = "0.00";
 			}
 			
 			
@@ -439,7 +441,7 @@
 										<bean:message bundle="lable" key="screen.depositamount"/>&nbsp;
 									</td>
 									<td>
-										<html:text property="depositamount" styleId="depositamount" size="15" maxlength="10" 
+										<html:text value="0.0" property="depositamount" styleId="depositamount" size="15" maxlength="10" 
 											onfocus="clearDivision('divAmount')" style="text-align: right"
 											onkeyup="this.value=formatNumber(unformatNumber(this.value))"/>										
 											<font color="red">*</font><br/>

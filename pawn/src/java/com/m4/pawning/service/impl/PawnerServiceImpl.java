@@ -22,7 +22,7 @@ public class PawnerServiceImpl implements PawnerService {
 	public void createPawner(UserConfig userConfig, Pawner pawner)throws PawnException {
 		String returnValue = rulesUtil.validateAge(pawner.getIdOrBrNo());
 		if (!(returnValue.isEmpty() || returnValue == null)){
-			throw new CommonDataAccessException(returnValue);
+			//throw new CommonDataAccessException(returnValue);
 		}			
 		pawnerDAO.createPawner(userConfig, pawner);
 	}
