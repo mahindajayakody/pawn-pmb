@@ -279,8 +279,8 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 					for (ReminderPara reminderPara : reminderParaList) {
 						if (ReminderCodeEnum.REM1 == ReminderCodeEnum.getEnumByCode(reminderPara.getCode())){
 							Reminder remi = reminderMap.get(reminderPara.getCode());
-							reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
-							ticketExpireDate.setTime(ticket.getTicketExpiryDate());
+							//reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
+							ticketExpireDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
 							if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(ticketExpireDate.getTime()))){
 								if (!reminderMap.containsKey(reminderPara.getCode())){
 									//Creating First Reminder Record
