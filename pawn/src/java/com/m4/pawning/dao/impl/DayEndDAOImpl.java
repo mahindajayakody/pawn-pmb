@@ -237,8 +237,8 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 				logger.info("End Creating Daily Interest : - " + ticket.getTicketId() + "  Interest Amount= " + interest);
 				
 				logger.info("**** Start Generating Reminders ****");
-				/*Commenting due to Dayend get Delay
-//				if (ticket.getTicketStatusId()==TicketStatusEnum.LAPS.getCode()){
+				//Commenting due to Dayend get Delay
+				if (ticket.getTicketStatusId()==TicketStatusEnum.LAPS.getCode()){
 					Map<String,Reminder> reminderMap=ticket.getReminderMap();
 
 					//Get Reminder Parameter List
@@ -361,9 +361,9 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 								}
 							}
 						}
-//					}
+					}
 					logger.info("**** End Generating Reminders ****");
-					end of Comment */
+					//end of Comment
 				}
 				//CRIB Process	
 				/*Commenting as the dayend get delay  	
