@@ -23,13 +23,13 @@
             <param name="ConversionPattern" value="%d{ISO8601} [%-20.20t] %-5p %30.30c (%6L) %C{1}.%M - %m%n" />
         </layout>
         <filter class="org.apache.log4j.varia.LevelRangeFilter">
-            <param name="LevelMin" value="debug" />
+            <param name="LevelMin" value="error" />
         </filter>
 
     </appender>
 	
     <logger name="com.m4">
-        <level value="debug"/>
+        <level value="error"/>
     </logger>
 	
 	<logger name="org.hibernate.SQL">
@@ -41,7 +41,7 @@
     </logger>
 	 
     <root>
-        <priority value ="debug" />
+        <priority value ="error" />
         <appender-ref ref="stdout" />
         <appender-ref ref="dailyrotfile" />
     </root>

@@ -1,50 +1,34 @@
 package com.m4.pawning.dao.impl;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 
-
 import org.apache.log4j.Logger;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.Hibernate;
 import org.hibernate.LockMode;
-import org.hibernate.Query;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
 
 import com.m4.core.bean.Serial;
 import com.m4.core.bean.SerialMaster;
-import com.m4.core.exception.CommonDataAccessException;
 import com.m4.core.util.RecordStatusEnum;
 import com.m4.core.util.TransactionDAOSupport;
 import com.m4.core.util.UserConfig;
 import com.m4.pawning.dao.DayEndDAO;
-import com.m4.pawning.dao.OfficerDAO;
 import com.m4.pawning.domain.Branch;
-import com.m4.pawning.domain.CribData;
 import com.m4.pawning.domain.DailyInterst;
 import com.m4.pawning.domain.DueFrom;
-import com.m4.pawning.domain.DueReceipt;
 import com.m4.pawning.domain.DueType;
 import com.m4.pawning.domain.InterestSlab;
-import com.m4.pawning.domain.Ledger;
 import com.m4.pawning.domain.Officer;
-import com.m4.pawning.domain.OfficerHistory;
 import com.m4.pawning.domain.Product;
 import com.m4.pawning.domain.Reminder;
 import com.m4.pawning.domain.ReminderPara;
@@ -237,21 +221,16 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 				logger.info("End Creating Daily Interest : - " + ticket.getTicketId() + "  Interest Amount= " + interest);
 				
 				logger.info("**** Start Generating Reminders ****");
-				//Commenting due to Dayend get Delay
-				if (ticket.getTicketStatusId()==TicketStatusEnum.LAPS.getCode())
-				{
+				if (ticket.getTicketStatusId()==TicketStatusEnum.LAPS.getCode()){
 					Map<String,Reminder> reminderMap=ticket.getReminderMap();
 
 					//Get Reminder Parameter List
 					ReminderParaCriteria=getSession().createCriteria(ReminderPara.class);
-//					ReminderParaCriteria.add(Restrictions.eq("schemeId", ticket.getSchemeId()));
 					ReminderParaCriteria.add(Restrictions.eq("productId", ticket.getProductId()));
 					ReminderParaCriteria.add(Restrictions.eq("companyId" , userConfig.getCompanyId()));
 
 					List<ReminderPara> reminderParaList=ReminderParaCriteria.list();
-					Calendar reminderDate=Calendar.getInstance();
-					Calendar ticketExpireDate=Calendar.getInstance();
-					reminderDate.setTime(userConfig.getLoginDate());
+					
 					
 					interestOutstanding=0;
 					intPaid=0;
@@ -276,14 +255,19 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 							otherDue+=dueFrom.getDueAmount();
 						}
 					}
-
+					Calendar reminderDate=Calendar.getInstance();
+					reminderDate.setTime(ticket.getTicketExpiryDate());
+					
 					for (ReminderPara reminderPara : reminderParaList) {
+						logger.info("**** Inside Reminders ****");
 						if (ReminderCodeEnum.REM1 == ReminderCodeEnum.getEnumByCode(reminderPara.getCode())){
 							Reminder remi = reminderMap.get(reminderPara.getCode());
-							//reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
-							ticketExpireDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
-							if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(ticketExpireDate.getTime()))){
+							reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
+							logger.info("**** About to create reminder for  ****" + ticket.getTicketNumber());
+							if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(userConfig.getLoginDate()))){
+								logger.info("**** im satisfied  ****" + ticket.getTicketNumber());
 								if (!reminderMap.containsKey(reminderPara.getCode())){
+									logger.info("**** Hooray  ****" + ticket.getTicketNumber());
 									//Creating First Reminder Record
 									Reminder reminder = new Reminder();
 									reminder.setBranchId(branch.getBranchId());
@@ -309,9 +293,9 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 								if (reminderMap.containsKey(ReminderCodeEnum.REM1.getCode())){
 									Reminder rem1 = reminderMap.get(ReminderCodeEnum.REM1.getCode());
 									if (rem1.getIsPrinted() == 1 ){										
-										reminderDate.setTime(ticketExpireDate.getTime());
+										reminderDate.setTime(rem1.getDatePrinted());
 										reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
-										if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(sysDate.getTime()))){
+										if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(userConfig.getLoginDate()))){
 											Reminder reminder2 = new Reminder();
 											reminder2.setBranchId(branch.getBranchId());
 											reminder2.setCapitalOutsanding(capitalOutsanding);
@@ -338,9 +322,9 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 								if (reminderMap.containsKey(ReminderCodeEnum.REM2.getCode())){
 									Reminder rem2=reminderMap.get(ReminderCodeEnum.REM2.getCode());
 									if(rem2.getIsPrinted()==1){
-										reminderDate.setTime(ticketExpireDate.getTime());
+										reminderDate.setTime(rem2.getDatePrinted());
 										reminderDate.add(Calendar.DATE, reminderPara.getNumberOfDays());
-										if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(sysDate.getTime()))){
+										if (simpdate.format(reminderDate.getTime()).equals(simpdate.format(userConfig.getLoginDate()))){
 											Reminder reminder3=new Reminder();
 											reminder3.setCapitalOutsanding(capitalOutsanding);
 											reminder3.setCompanyId(userConfig.getCompanyId());
@@ -362,11 +346,135 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 								}
 							}
 						}
-					}
+//					}
 					logger.info("**** End Generating Reminders ****");
-					//end of Comment
 				}
+//				//CRIB Process	
+//				if (monthEnd.get(Calendar.DAY_OF_MONTH) == 1 && ticket.getProductId() == productList.get(1).getProductId()) {
+//					
+//					try {
+//					
+//						
+//						dueReceiptCriteria=getSession().createCriteria(DueReceipt.class);
+//						dueReceiptCriteria.add(Restrictions.eq("ticketId", ticket.getTicketId()));
+//						dueReceiptCriteria.addOrder(Order.desc("dueReceiptId"));
+//						List<DueReceipt> dueReceipts=dueReceiptCriteria.list();
+//						
+//						CribData cribData =new CribData();
+//						cribData.setTicketId(ticket.getTicketId());
+//						cribData.setBranchId(ticket.getBranchId());
+//						cribData.setCompanyId(ticket.getCompanyId());
+//						cribData.setProductId(ticket.getProductId());
+//	 					cribData.setPawner(ticket.getPawner());
+//						cribData.setClosureDate(ticket.getTicketClosedRenewalDate());
+//						cribData.setIsAuctioned(ticket.getIsAuctioned());
+//						cribData.setLastUpdateDate(sysDate.getTime());
+//						cribData.setTicketStatusId(ticket.getTicketStatusId());
+//						cribData.setBranchCode(branch.getCode());
+//						cribData.setTicketNo(ticket.getTicketNumber());
+//						cribData.setPeriod(ticket.getPeriod());
+//						cribData.setGrantDate(ticket.getTicketDate());
+//						cribData.setExpireDate(ticket.getTicketExpiryDate());
+//						cribData.setAmountGranted(ticket.getPawnAdvance());
+//						
+//						
+//						cribData.setTotalCapitalOutstanding(capitalOutsanding);
+//						cribData.setTotalCapitalPaid(capPaid);
+//						cribData.setTotalInterestAccrued(intAccrued);
+//						cribData.setTotalInterestPaid(intPaid);
+//						cribData.setTotalOther(otherDue);
+//						cribData.setTotalOtherPaid(othPaid);
+//						
+//						for (DueReceipt dueReceipt : dueReceipts) {
+//							cribData.setLastReceipId(dueReceipt.getReceiptId());
+//							cribData.setLastReceiptDate(dueReceipt.getSettledDate());
+//							break;
+//						}
+//						initializeDomainObject(userConfig, cribData);
+//						getHibernateTemplate().save(cribData);
+//					} catch (Exception e) {
+//						throw new CommonDataAccessException("errors.cannotcreateCRIB");
+//					}
+//				}
+				//End Of CRIB Process
 			}
+
+			logger.info("**** Begins Ledger Posting ****");
+
+//			Calendar ledgerDate=Calendar.getInstance();
+//			ledgerDate.setTime(userConfig.getLoginDate());
+			
+//			for (Product product : productList) {
+//				List<DueReceipt>dueReceiptList = getSession().createCriteria(DueReceipt.class)
+//												.add(Restrictions.eq("companyId",userConfig.getCompanyId()))
+//												.add(Restrictions.eq("branchId", branch.getBranchId()))
+//												.add(Restrictions.eq("settledDate", ledgerDate.getTime()))
+//												.add(Restrictions.eq("productId", product.getProductId())).list();
+//
+//				if (totalInterest > 0){
+//					Ledger ledgerInt = new Ledger();
+//					ledgerInt.setDebitAmount(totalInterest);
+//					ledgerInt.setDueType(intType);
+//					ledgerInt.setProductId(product.getProductId());
+//					ledgerInt.setDate(userConfig.getLoginDate());
+//					ledgerInt.setIsBranchExplycit(true);
+//					ledgerInt.setBranchId(branch.getBranchId());
+//					initializeDomainObject(userConfig, ledgerInt);
+//					getHibernateTemplate().save(ledgerInt);
+//					totalInterest =0;
+//				}
+//
+//
+//				if (!dueReceiptList.isEmpty()){
+//					for(DueType dueType:dueTypeList){
+//						double selltedAmount=0.0;
+//						for (DueReceipt dueReceipt : dueReceiptList) {
+//							if (dueReceipt.getDueTypeId() == dueType.getDueTypeId()){
+//								selltedAmount += dueReceipt.getSettleAmount();
+//							}
+//						}
+//						if (selltedAmount > 0){
+//							Ledger ledger = new Ledger();
+//							ledger.setCreditAmount(selltedAmount);
+//							ledger.setDueType(dueType);
+//							ledger.setProductId(product.getProductId());
+//							ledger.setDate(userConfig.getLoginDate());
+//							ledger.setIsBranchExplycit(true);
+//							ledger.setBranchId(branch.getBranchId());
+//							initializeDomainObject(userConfig, ledger);
+//							getHibernateTemplate().save(ledger);
+//							selltedAmount=0;
+//						}
+//					}
+//				}
+//
+//				double totalAdvance=0.0;
+//				ticketList = getSession().createCriteria(Ticket.class)
+//							.add(Restrictions.eq("companyId",userConfig.getCompanyId()))
+//						    .add(Restrictions.eq("branchId", branch.getBranchId()))
+//						    .add(Restrictions.eq("ticketDate", ledgerDate.getTime()))
+//						    .add(Restrictions.eq("productId", product.getProductId()))
+//						    .add(Restrictions.eq("ticketStatusId", TicketStatusEnum.ACTIVE.getCode())).list();
+//
+//				for (Ticket ticket : ticketList) {
+//					totalAdvance += ticket.getPawnAdvance();
+//				}
+//				if (totalAdvance > 0){
+//					Ledger ledgerAdv = new Ledger();
+//					ledgerAdv.setDebitAmount(totalAdvance);
+//					ledgerAdv.setDueType(payType);
+//					ledgerAdv.setProductId(product.getProductId());
+//					ledgerAdv.setDate(userConfig.getLoginDate());
+//					ledgerAdv.setIsBranchExplycit(true);
+//					ledgerAdv.setBranchId(branch.getBranchId());
+//					initializeDomainObject(userConfig, ledgerAdv);
+//					getHibernateTemplate().save(ledgerAdv);
+//					totalAdvance=0;
+//				}
+//			}
+
+			logger.info("**** End Ledger Posting ****");
+
 
 			//Create record for SystemDate
 	        Calendar calendar = Calendar.getInstance();
@@ -427,6 +535,172 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 		ledgerCalanderEnd.set(ledgerCalander.get(Calendar.YEAR), ledgerCalander.get(Calendar.MONTH), ledgerCalander.getActualMaximum(Calendar.DATE));
 		
 		ledgerCalander.add(Calendar.DATE, 1);
+		
+//		if (ledgerCalander.get(Calendar.DAY_OF_MONTH) == 1) {
+//		
+//			String hql = "select b.code as branchId ,d.CODE as duetypeId, sum(l.crAmount) as crAmount, sum(l.drAmount) as drAmount from tblledger as l " +
+//			            "inner join tblbranch b on b.branchid = l.branchid " +
+//			            "inner join tblduetype d on d.duetypeid = l.duetypeid " +
+//			            "where l.date >= '" + sqlpdate.format(ledgerCalanderStart.getTime()) + "' " +
+//			            "and l.date < '" + sqlpdate.format(ledgerCalanderEnd.getTime()) + "' " +
+//			            "group by l.branchid,l.duetypeid"; 
+//
+//			Query query = getSession().createSQLQuery(hql)
+//							.addScalar("branchId", Hibernate.STRING)
+//							.addScalar("duetypeId", Hibernate.STRING)
+//	                        .addScalar("crAmount", Hibernate.DOUBLE)
+//	                        .addScalar("drAmount", Hibernate.DOUBLE);
+//						
+//			List<Object[]> list = query.list();
+//
+//			StringBuffer stringBuffer =new StringBuffer();
+//			for (Object object[] : list) {
+//				stringBuffer.append(object[0]);
+//				stringBuffer.append("|");
+//				stringBuffer.append(object[1]);
+//				stringBuffer.append("|");
+//				stringBuffer.append(object[2]);
+//				stringBuffer.append("|");
+//				stringBuffer.append(object[3]);
+//				stringBuffer.append("|");
+//				stringBuffer.append(simpdate.format(ledgerCalanderEnd.getTime()));
+//				stringBuffer.append("\n");
+//			}	
+//			
+//			StringBuffer cribDataSB=new StringBuffer();
+//			cribCriteria = getSession().createCriteria(CribData.class);
+//			cribCriteria.add(Restrictions.eq("lastUpdateDate", userConfig.getLoginDate()));
+//			List<CribData> cribDataList=cribCriteria.list();
+//			
+//			cribDataSB.append("PAWNING CRIB OUTPUT FILE AS AT | ");
+//			cribDataSB.append(simpdate.format(sysDate.getTime()));
+//			cribDataSB.append("\n");
+//			cribDataSB.append("GENERATE DATE/TIME | ");
+//			cribDataSB.append(simpdate.format(Calendar.getInstance().getTime()));
+//			cribDataSB.append("|");
+//			cribDataSB.append(timeFormat.format(Calendar.getInstance().getTime()));
+//			cribDataSB.append("\n");
+//			cribDataSB.append("GENERATE USER :|");
+//			cribDataSB.append(userConfig.getLoginName());
+//			cribDataSB.append("\n");
+//			for (CribData cribData : cribDataList) {
+//				
+//				cribDataSB.append(cribData.getBranchCode());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTicketNo());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPeriod());
+//				cribDataSB.append("|");
+//				cribDataSB.append(simpdate.format(cribData.getGrantDate()));
+//				cribDataSB.append("|");
+//				cribDataSB.append(simpdate.format(cribData.getExpireDate()));
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getAmountGranted());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalCapitalPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getAmountGranted()-cribData.getTotalCapitalPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalInterestAccrued());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalInterestPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalInterestAccrued() - cribData.getTotalInterestPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalOther());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalOtherPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTotalOther() - cribData.getTotalOtherPaid());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getLastReceiptDate() == null ? "":simpdate.format(cribData.getLastReceiptDate()));
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getTicketStatusId());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getClosureDate() == null ? "":simpdate.format(cribData.getClosureDate()));
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getIsAuctioned() == 1 ? "YES":"NO");
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getPawnerCode());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getIdOrBrNo());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getPassportNo() == null ? "":cribData.getPawner().getPassportNo());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getDrivingLicenseNumber() == null ? "":cribData.getPawner().getDrivingLicenseNumber());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getTitle());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getInitials());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getSurName());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getInitialsInFull());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getMaritalStatus());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getSex());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getAddressLine1());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getAddressLine2());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getAddressLine3());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getAddressLine4());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getHomeTelephoneNo());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getMobileNo());
+//				cribDataSB.append("|");
+//				cribDataSB.append(cribData.getPawner().getEmailAddress());
+//				cribDataSB.append("\n");
+//				
+//			} 
+//			
+//			try{
+//				StringBuilder buffer = new StringBuilder();
+//				buffer.append(file.getCanonicalPath() + "\\gl\\");
+//				buffer.append(simpdate.format(ledgerCalanderEnd.getTime()));
+//				buffer.append(".txt");
+//				logger.info("Try to write to GL File Name : "+ buffer.toString());
+//				
+//				FileWriter fileWriter   = new FileWriter(buffer.toString(),true);
+//				BufferedWriter glOutput = new BufferedWriter(fileWriter);
+//				glOutput.write(stringBuffer.toString());
+//				glOutput.close();
+//				fileWriter.close();
+//				sendMail.sendMessage("it@pmb.lk,mahinda@modular4.com,itsupport@pmb.lk" , "Monthly GL Download", "", "",buffer.toString());
+//				
+//				
+//				ledgerCalanderEnd.add(Calendar.DATE, -1);
+//				StringBuilder CribBuffer = new StringBuilder();
+//				CribBuffer.append(file.getCanonicalPath() + "\\CRIB\\");
+//				CribBuffer.append("PAWN_CRIB_");
+//				CribBuffer.append(simpdate.format(ledgerCalanderEnd.getTime()));
+//				CribBuffer.append(".txt");
+//				logger.info("Try to write to CRIB File Name : "+ CribBuffer.toString());
+//				fileWriter   = new FileWriter(CribBuffer.toString(),true);
+//				BufferedWriter cribOutput = new BufferedWriter(fileWriter);
+//				cribOutput.write(cribDataSB.toString());
+//				cribOutput.close();
+//				fileWriter.close();
+//				sendMail.sendMessage("it@pmb.lk,itsupport@pmb.lk" , "CRIB Download", "", "",CribBuffer.toString());
+//				
+//			
+//				
+//			}catch (IOException ex){
+//				logger.error(ex.getMessage()+ file.getAbsolutePath());
+//				throw new CommonDataAccessException("error.cannotcreatefile");
+//			}
+//			catch (MessagingException e) {
+//				logger.error(e.getMessage());
+//				throw new CommonDataAccessException("errors.sendmailfail");
+//			}
+//			
+		}
+
+		logger.info("**** End Ledger Entry Printing ****");
 
 		logger.debug("**** Leaving from doDayEndProcess method ****");
 	}
@@ -467,7 +741,7 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 		passwordNotify.setTime(userConfig.getLoginDate());
 		
 		Calendar passwordExpire =Calendar.getInstance();		
-		/*Commenting due to Dayend Get Delay
+		
 		List<Officer> officers =null;
 		Criteria criteria=getSession().createCriteria(Officer.class);
 		criteria.add(Restrictions.eq("isActive", 1));
@@ -496,7 +770,6 @@ public class DayEndDAOImpl extends TransactionDAOSupport implements DayEndDAO {
 			}
 			
 		}
-		*/
 		
 	}
 }
